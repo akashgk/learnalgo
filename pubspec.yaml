@@ -1,0 +1,6 @@
+name: learnalgo
+description: AlgoExpert-style interview questions solved in modern Dart, with study notes.
+publish_to: none
+
+environment:
+  sdk: ^3.9.0
