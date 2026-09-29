@@ -87,7 +87,7 @@ Sorted by height: `[1,3,1], [2,1,2], [3,2,3], [2,3,4], [4,4,5], [2,2,8]` (indice
 | 2 | [3,2,3] | [2,1,2] (H 2) | 5 | 1 |
 | 3 | [2,3,4] | none fits strictly in all dims | 4 | |
 | 4 | [4,4,5] | [1,3,1] (1), [2,1,2] (2), [3,2,3] (5) | **10** | 2 |
-| 5 | [2,2,8] | [1,?]: [1,3,1] no (depth), [2,1,2] no (width equal) | 8 | |
+| 5 | [2,2,8] | none: [1,3,1] fails on depth (3 > 2), [2,1,2] on width (2 = 2), the rest are wider | 8 | |
 
 Best bottom: disk 4 with height 10. Walk up: 4 -> 2 -> 1. Top to bottom: `[2,1,2], [3,2,3], [4,4,5]`.
 

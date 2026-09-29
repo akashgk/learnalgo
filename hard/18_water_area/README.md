@@ -8,16 +8,6 @@ An array of non-negative integers represents pillars of width 1 and the given he
 
 ```
 [0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]  ->  48
-
-        |
-        |
-  |     |
-  |     |
-  |     |
-  |  |  |
-  |  |  |
-  |  |  |     |
-  |  |  |  || |
 ```
 
 ## Step 1: Think about one index at a time
