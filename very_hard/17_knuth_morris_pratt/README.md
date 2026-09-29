@@ -1,21 +1,132 @@
 # Knuth-Morris-Pratt Algorithm
 
-**Difficulty:** Very Hard | **Category:** Famous Algorithms | **Pattern:** Failure function (longest prefix-suffix) string matching
+**Difficulty:** Very Hard | **Category:** Famous Algorithms | **Pattern:** String matching with a failure function (longest prefix that is also a suffix)
 
-## Problem
-Return whether a substring (pattern) occurs in a string, in O(n + m) time.
+## The problem
 
-## Building up the logic
-1. **Naive matching:** try every start position, compare up to m characters: O(n * m). The waste: after a partial match fails, it restarts one position later and **re-reads** characters it already knows.
-2. **Insight:** when `j` characters of the pattern have matched and the next one fails, the text's last `j` characters equal `pattern[0..j)`. The next possible match must start at a suffix of that matched part which is also a prefix of the pattern. The longest such overlap is a property of the **pattern alone**, so precompute it.
-3. **LPS (failure) array:** `lps[i]` = length of the longest proper prefix of `pattern[0..i]` that is also a suffix of it. Example `aabaaab`: `[0, 1, 0, 1, 2, 2, 3]`.
-4. **Matching:** walk the text once. On a mismatch with `j > 0`, set `j = lps[j - 1]` and retry the same text character; never move the text pointer backward. On a match, `j++`; if `j == m`, found.
-5. **Building LPS** is the same algorithm run on the pattern against itself.
+Return whether a pattern (`substring`) occurs in a text (`string`), in **O(n + m)** time.
+
+```
+string = "aefoaefcdaefcdaed", substring = "aefcdaed"  ->  true
+```
+
+## Step 1: Why the naive method is slow
+
+Naive matching tries every start position and compares up to m characters: **O(n * m)**. Its waste is visible in this example: at text index 11, the pattern has matched `"aefcdae"` (7 characters) and then fails. The naive method restarts at the **next** start position and re-reads characters it has already seen.
+
+## Step 2: What we already know after a partial match
+
+When `j` pattern characters have matched and the next one fails, we know the last `j` characters of the text are exactly `pattern[0..j)`. So the next possible match must begin at some **suffix of that matched part that is also a prefix of the pattern**. We should jump to the **longest** such overlap, and not move backward in the text at all.
+
+In the example, the matched part is `"aefcdae"`. Its longest proper prefix that is also a suffix is `"ae"` (length 2). So after the mismatch, we continue as if `"ae"` has already matched: `j = 2`, and compare the same text character against `pattern[2]` (`'f'`). It matches, and the search goes on without re-reading anything.
+
+The overlap lengths depend **only on the pattern**, so they can be precomputed.
+
+## Step 3: The LPS (failure) array
+
+`lps[i]` = the length of the longest proper prefix of `pattern[0..i]` that is also a suffix of it.
+
+| pattern | a | e | f | c | d | a | e | d |
+|---|---|---|---|---|---|---|---|---|
+| lps | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 |
+
+- At index 5 (`"aefcda"`): prefix `"a"` = suffix `"a"`: 1.
+- At index 6 (`"aefcdae"`): prefix `"ae"` = suffix `"ae"`: 2.
+
+Another example: `"aabaaab"` gives `[0, 1, 0, 1, 2, 2, 3]`.
+
+Building the LPS array is the same matching algorithm run on the pattern against itself: O(m).
+
+## Step 4: Matching
+
+```
+j = 0                                   # pattern characters matched
+for each text character c:
+    while j > 0 and c != pattern[j]:    # mismatch: fall back
+        j = lps[j - 1]
+    if c == pattern[j]: j++
+    if j == m: found
+```
+
+The text pointer never moves backward.
+
+## Step 5: The code
+
+<!-- CODE:START -->
+
+Full source: [`knuth_morris_pratt.dart`](knuth_morris_pratt.dart) (run it with `dart run`).
+
+```dart
+// Knuth-Morris-Pratt: does `substring` occur in `string`? O(n + m) time, O(m) space.
+// lps[i] = length of the longest proper prefix of pattern[0..i] that is also a suffix of it.
+
+bool knuthMorrisPrattAlgorithm(String string, String substring) {
+  if (substring.isEmpty) return true;
+  final lps = _buildLps(substring);
+  var j = 0; // characters of the pattern matched so far
+  for (var i = 0; i < string.length; i++) {
+    while (j > 0 && string[i] != substring[j]) {
+      j = lps[j - 1]; // fall back without moving i
+    }
+    if (string[i] == substring[j]) j++;
+    if (j == substring.length) return true;
+  }
+  return false;
+}
+
+List<int> _buildLps(String p) {
+  final lps = List<int>.filled(p.length, 0);
+  var len = 0;
+  for (var i = 1; i < p.length; i++) {
+    while (len > 0 && p[i] != p[len]) {
+      len = lps[len - 1];
+    }
+    if (p[i] == p[len]) len++;
+    lps[i] = len;
+  }
+  return lps;
+}
+```
+
+<!-- CODE:END -->
+
+### Walkthrough
+
+- `_buildLps` keeps `len`, the length of the current matched prefix, and falls back through `lps[len - 1]` on mismatches, exactly like the search.
+- `knuthMorrisPrattAlgorithm` runs the matching loop from Step 4.
+
+## Step 6: Dry run (generated by running the algorithm)
+
+| text index | char | fallbacks | j after |
+|---|---|---|---|
+| 0..2 | a, e, f | | 3 |
+| 3 | o | j 3 -> lps[2] = 0 | 0 |
+| 4..10 | a, e, f, c, d, a, e | | 7 |
+| 11 | f | j 7 -> lps[6] = 2, then `f` matches pattern[2] | 3 |
+| 12..16 | c, d, a, e, d | | 8 = m: **found** |
 
 ## Complexity
-- Time: O(n + m). The amortized argument: `j` increases at most once per text character, and each fallback decreases it, so total fallbacks are bounded by n.
-- Space: O(m) for the LPS array.
 
-## Interview notes
-- LeetCode #28 (Find the Index of the First Occurrence). Rarely required to code from scratch at FAANG, but being able to explain the LPS array is a strong signal. The LPS array also answers "shortest palindrome" (#214) and "repeated substring pattern" (#459).
-- Alternatives: Rabin-Karp (rolling hash, O(n + m) expected, easy to code), Z-algorithm (same power as KMP).
+- **Time: O(n + m)**. Amortized argument: `j` increases by at most 1 per text character, and each fallback decreases it, so total fallbacks are at most n.
+- **Space: O(m)** for the LPS array.
+
+## Common mistakes
+
+- Advancing the text pointer on a mismatch before falling back (skips possible matches).
+- Using `lps[j]` instead of `lps[j - 1]` in the fallback.
+
+## Alternatives
+
+- **Rabin-Karp:** rolling hash; O(n + m) expected; easy to extend to many patterns of the same length.
+- **Z-algorithm:** computes, for every position, the longest substring starting there that matches a prefix; equivalent power.
+- **Aho-Corasick:** KMP generalized to many patterns (see Multi String Search, hard 56).
+
+## Follow-ups
+
+1. **Find the Index of the First Occurrence in a String (LeetCode #28).**
+2. **Repeated Substring Pattern (#459):** a string is a repetition iff `n % (n - lps[n-1]) == 0` and `lps[n-1] > 0`.
+3. **Shortest Palindrome (#214):** LPS of `s + '#' + reverse(s)`.
+
+## What to remember
+
+After a partial match, jump to the longest prefix of the pattern that is also a suffix of what matched (the LPS value) and never move backward in the text.
