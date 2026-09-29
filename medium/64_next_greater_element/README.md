@@ -20,7 +20,7 @@ For each index, scan forward (wrapping) up to n - 1 elements for the first bigge
 
 Walk left to right. Keep the indices that are **still waiting** for their next greater element. When a new value arrives, it answers **every** waiting index whose value is smaller than it. Then the new index starts waiting too.
 
-Which waiting indices does a new value answer? Notice the waiting values are **non-increasing** from oldest to newest: if a newer smaller-or-equal value were waiting behind... more precisely, if an older value were smaller than a newer one, the newer one would already have answered it. So the waiting indices form a **monotonic stack**, and a new value answers a run from the **top** of the stack: pop while the top's value is smaller.
+Which waiting indices does a new value answer? The waiting values are always **non-increasing** from oldest to newest: if an older waiting value were smaller than a newer one, the newer one would already have answered it when it arrived. So the waiting indices form a **monotonic stack**, and a new value answers a run from the **top**: pop while the top's value is smaller.
 
 ## Step 3: Circularity
 
