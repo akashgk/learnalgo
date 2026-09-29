@@ -143,9 +143,9 @@ class _Heap {
 | 200 | {5, 10} after rebalance | {100, 200} | (10 + 100) / 2 = 55 |
 | 6 | {5, 6, 10} | {100, 200} | 10 |
 | 13 | {5, 6, 10} | {13, 100, 200} | (10 + 13) / 2 = 11.5 |
-| 14 | {5, 6, 10} -> rebalanced to {5, 6, 10, 13} | {14, 100, 200} | 13 |
+| 14 | {5, 6, 10} | {13, 14, 100, 200} | 13 (top of the larger heap) |
 
-(For 200: it goes to `upper`, making `upper` 3 vs `lower` 1, so `upper`'s top 10 moves to `lower`.)
+(For 200: it goes to `upper`, making `upper` 3 vs `lower` 1, so `upper`'s top 10 moves to `lower`. For 14: sizes 3 vs 4 differ by only 1, so no rebalance is needed.)
 
 ## Complexity
 

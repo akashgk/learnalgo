@@ -11,7 +11,7 @@ A matrix uses **0 for land and 1 for water** (AlgoExpert's convention; LeetCode'
  [0, 0, 1],
  [1, 1, 0]]   ->  5
 
-Turning (2, 1) into land connects the 3-cell island {(0,0),(1,0),(1,1)}
+Turning (2, 1) (or (1, 2)) into land connects the 3-cell island {(0,0),(1,0),(1,1)}
 with the 1-cell island {(2,2)}: 3 + 1 + 1 = 5.
 ```
 
@@ -113,9 +113,9 @@ Islands: id 0 = `{(0,0), (1,0), (1,1)}` size 3; id 1 = `{(2,2)}` size 1.
 |---|---|---|
 | (0, 1) | {0} | 4 |
 | (0, 2) | {} | 1 |
-| (1, 2) | {1} | 2 |
+| (1, 2) | {0, 1} (via (1, 1) and (2, 2)) | **5** |
 | (2, 0) | {0} | 4 |
-| (2, 1) | {0, 1} | **5** |
+| (2, 1) | {0, 1} | **5** (tie) |
 
 ## Complexity
 
