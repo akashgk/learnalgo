@@ -83,8 +83,8 @@ String longestSubstringWithoutDuplication(String string) {
 | 3 | m | grow | "clem" | "clem" |
 | 4 | e | e last at 2: start = 3 | "me" | "clem" |
 | 5..10 | n, t, i, s, a, c | grow (the old c at 0 is before start) | "mentisac" | "mentisac" |
-| 11 | a | a last at 10: start = 11 | "a" | "mentisac" |
-| 12 | p | grow | "ap" | "mentisac" |
+| 11 | a | a last at 9: start = 10 | "ca" | "mentisac" |
+| 12 | p | grow | "cap" | "mentisac" |
 
 ## Complexity
 
