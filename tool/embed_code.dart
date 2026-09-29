@@ -36,7 +36,11 @@ void main(List<String> args) {
     }
   }
   if (checkOnly) {
-    print(stale == 0 ? 'All embedded code is up to date.' : '$stale README(s) have stale code. Run: dart run tool/embed_code.dart');
+    print(
+      stale == 0
+          ? 'All embedded code is up to date.'
+          : '$stale README(s) have stale code. Run: dart run tool/embed_code.dart',
+    );
     if (stale > 0) exitCode = 1;
   } else {
     print('Updated $updated README(s).');

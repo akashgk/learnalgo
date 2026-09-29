@@ -19,13 +19,14 @@ Sort an array of integers in ascending order using Merge Sort.
 A single element is already sorted: that is the base case.
 
 ```
+split (the code puts the middle element in the left half):
 [8, 5, 2, 9, 5, 6, 3]
-[8, 5, 2]          [9, 5, 6, 3]
-[8] [5, 2]         [9, 5] [6, 3]
-[8] [5] [2]        [9] [5] [6] [3]
+[8, 5, 2, 9]            [5, 6, 3]
+[8, 5] [2, 9]           [5, 6] [3]
+[8] [5] [2] [9]         [5] [6] [3]
 merge upward:
-[8] [2, 5]         [5, 9] [3, 6]
-[2, 5, 8]          [3, 5, 6, 9]
+[5, 8] [2, 9]           [5, 6] [3]
+[2, 5, 8, 9]            [3, 5, 6]
 [2, 3, 5, 5, 6, 8, 9]
 ```
 
