@@ -13,9 +13,7 @@ List<String> minimumCharactersForWords(List<String> words) {
       if (c > (need[ch] ?? 0)) need[ch] = c;
     });
   }
-  return [
-    for (final MapEntry(key: ch, value: c) in need.entries) ...List.filled(c, ch),
-  ];
+  return [for (final MapEntry(key: ch, value: c) in need.entries) ...List.filled(c, ch)];
 }
 
 void check(Object? got, Object? want) {

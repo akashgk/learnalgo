@@ -47,6 +47,16 @@ void main() {
     ]),
     3,
   );
-  check(minimumPassesOfMatrix([[1, 0, -1]]), -1); // 0 blocks the spread
-  check(minimumPassesOfMatrix([[1, 2]]), 0);
+  check(
+    minimumPassesOfMatrix([
+      [1, 0, -1],
+    ]),
+    -1,
+  ); // 0 blocks the spread
+  check(
+    minimumPassesOfMatrix([
+      [1, 2],
+    ]),
+    0,
+  );
 }

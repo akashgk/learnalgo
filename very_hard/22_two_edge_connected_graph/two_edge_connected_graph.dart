@@ -38,9 +38,34 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(twoEdgeConnectedGraph([[1, 2, 5], [0, 2], [0, 1, 3], [2, 4, 5], [3, 5], [0, 3, 4]]), true);
-  check(twoEdgeConnectedGraph([[1], [0, 2], [1]]), false); // a path: every edge is a bridge
-  check(twoEdgeConnectedGraph([[1, 2], [0, 2], [0, 1], []]), false); // disconnected
+  check(
+    twoEdgeConnectedGraph([
+      [1, 2, 5],
+      [0, 2],
+      [0, 1, 3],
+      [2, 4, 5],
+      [3, 5],
+      [0, 3, 4],
+    ]),
+    true,
+  );
+  check(
+    twoEdgeConnectedGraph([
+      [1],
+      [0, 2],
+      [1],
+    ]),
+    false,
+  ); // a path: every edge is a bridge
+  check(
+    twoEdgeConnectedGraph([
+      [1, 2],
+      [0, 2],
+      [0, 1],
+      [],
+    ]),
+    false,
+  ); // disconnected
   check(twoEdgeConnectedGraph([]), true);
   check(twoEdgeConnectedGraph([[]]), true); // single vertex
 }

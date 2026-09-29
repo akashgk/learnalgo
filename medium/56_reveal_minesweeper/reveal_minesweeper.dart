@@ -38,11 +38,15 @@ void check(Object? got, Object? want) {
 
 void main() {
   check(
-    revealMinesweeper([
-      ['M', 'M'],
-      ['H', 'H'],
-      ['H', 'H'],
-    ], 2, 0),
+    revealMinesweeper(
+      [
+        ['M', 'M'],
+        ['H', 'H'],
+        ['H', 'H'],
+      ],
+      2,
+      0,
+    ),
     [
       ['M', 'M'],
       ['2', '2'],
@@ -50,12 +54,16 @@ void main() {
     ],
   );
   check(
-    revealMinesweeper([
-      ['H', 'H', 'H', 'H', 'M'],
-      ['H', '1', 'M', 'H', '1'],
-      ['H', 'H', 'H', 'H', 'H'],
-      ['H', 'H', 'H', 'H', 'H'],
-    ], 3, 4),
+    revealMinesweeper(
+      [
+        ['H', 'H', 'H', 'H', 'M'],
+        ['H', '1', 'M', 'H', '1'],
+        ['H', 'H', 'H', 'H', 'H'],
+        ['H', 'H', 'H', 'H', 'H'],
+      ],
+      3,
+      4,
+    ),
     [
       ['0', '1', 'H', 'H', 'M'],
       ['0', '1', 'M', '2', '1'],
@@ -63,5 +71,16 @@ void main() {
       ['0', '0', '0', '0', '0'],
     ],
   );
-  check(revealMinesweeper([['M']], 0, 0), [['X']]);
+  check(
+    revealMinesweeper(
+      [
+        ['M'],
+      ],
+      0,
+      0,
+    ),
+    [
+      ['X'],
+    ],
+  );
 }

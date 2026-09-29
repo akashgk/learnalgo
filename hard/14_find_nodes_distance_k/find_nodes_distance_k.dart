@@ -50,7 +50,11 @@ void main() {
   //    4   5    6
   //            / \
   //           7   8
-  final tree = BinaryTree(1, BinaryTree(2, BinaryTree(4), BinaryTree(5)), BinaryTree(3, null, BinaryTree(6, BinaryTree(7), BinaryTree(8))));
+  final tree = BinaryTree(
+    1,
+    BinaryTree(2, BinaryTree(4), BinaryTree(5)),
+    BinaryTree(3, null, BinaryTree(6, BinaryTree(7), BinaryTree(8))),
+  );
   check(findNodesDistanceK(tree, 3, 2)..sort(), [2, 7, 8]);
   check(findNodesDistanceK(tree, 1, 0), [1]);
   check(findNodesDistanceK(tree, 4, 10), []);

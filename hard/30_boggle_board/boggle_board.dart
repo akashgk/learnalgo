@@ -39,7 +39,10 @@ List<String> boggleBoard(List<List<String>> board, List<String> words) {
       explore(r, c, root);
     }
   }
-  return [for (final w in words) if (found.contains(w)) w];
+  return [
+    for (final w in words)
+      if (found.contains(w)) w,
+  ];
 }
 
 void check(Object? got, Object? want) {
@@ -61,5 +64,14 @@ void main() {
   ];
   final words = ['this', 'is', 'not', 'a', 'simple', 'boggle', 'board', 'test', 'REPEATED', 'NOTRE-PEATED'];
   check(boggleBoard(board, words), ['this', 'is', 'a', 'simple', 'boggle', 'board', 'NOTRE-PEATED']);
-  check(boggleBoard([['a', 'b'], ['c', 'd']], ['abdc', 'aa', 'acdb']), ['abdc', 'acdb']);
+  check(
+    boggleBoard(
+      [
+        ['a', 'b'],
+        ['c', 'd'],
+      ],
+      ['abdc', 'aa', 'acdb'],
+    ),
+    ['abdc', 'acdb'],
+  );
 }

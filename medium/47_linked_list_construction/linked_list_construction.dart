@@ -110,7 +110,9 @@ void check(Object? got, Object? want) {
 
 void main() {
   final list = DoublyLinkedList();
-  final nodes = [for (var v in [1, 2, 3, 3, 4, 5, 6]) Node(v)];
+  final nodes = [
+    for (var v in [1, 2, 3, 3, 4, 5, 6]) Node(v),
+  ];
   for (final n in nodes.take(5)) {
     list.setTail(n);
   }

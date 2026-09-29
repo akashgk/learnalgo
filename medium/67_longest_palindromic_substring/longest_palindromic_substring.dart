@@ -14,7 +14,8 @@ String longestPalindromicSubstring(String string) {
   }
 
   for (var i = 0; i < string.length; i++) {
-    for (final (lo, hi) in [expand(i, i), expand(i, i + 1)]) { // odd and even centers
+    for (final (lo, hi) in [expand(i, i), expand(i, i + 1)]) {
+      // odd and even centers
       if (hi - lo > bestHi - bestLo) (bestLo, bestHi) = (lo, hi);
     }
   }

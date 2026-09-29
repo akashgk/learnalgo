@@ -16,5 +16,8 @@
 - Time: O(n^2).
 - Space: O(n).
 
+## Edge case
+Initialize each amount with the single-bottle option (`best[u] = prices[u]`, `firstBottle[u] = u`). If you start from 0 and only update on strict improvement, inputs where nothing beats 0 (all prices 0) leave `firstBottle[u] = 0`, and reconstruction subtracts 0 forever. A randomized brute-force comparison caught exactly this bug in an earlier draft of this solution.
+
 ## Interview notes
 - Rod cutting is the canonical example used to teach the difference between memoization and bottom-up DP. It is also unbounded knapsack where "weight" is size and the capacity must be filled exactly.

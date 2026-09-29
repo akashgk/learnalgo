@@ -32,8 +32,42 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(lineThroughPoints([[1, 1], [2, 2], [3, 3], [0, 4], [-2, 6], [4, 0], [2, 1]]), 4);
-  check(lineThroughPoints([[1, 1]]), 1);
-  check(lineThroughPoints([[0, 0], [0, 5], [0, -3], [1, 1]]), 3); // vertical line
-  check(lineThroughPoints([[1, 1], [3, 2], [5, 3], [4, 1], [2, 3], [1, 4]]), 4);
+  check(
+    lineThroughPoints([
+      [1, 1],
+      [2, 2],
+      [3, 3],
+      [0, 4],
+      [-2, 6],
+      [4, 0],
+      [2, 1],
+    ]),
+    4,
+  );
+  check(
+    lineThroughPoints([
+      [1, 1],
+    ]),
+    1,
+  );
+  check(
+    lineThroughPoints([
+      [0, 0],
+      [0, 5],
+      [0, -3],
+      [1, 1],
+    ]),
+    3,
+  ); // vertical line
+  check(
+    lineThroughPoints([
+      [1, 1],
+      [3, 2],
+      [5, 3],
+      [4, 1],
+      [2, 3],
+      [1, 4],
+    ]),
+    4,
+  );
 }

@@ -17,10 +17,10 @@ List<List<String>> calendarMatching(
   String toTime(int m) => '${m ~/ 60}:${(m % 60).toString().padLeft(2, '0')}';
 
   List<List<int>> withBounds(List<List<String>> cal, List<String> bounds) => [
-        [0, toMin(bounds[0])], // busy before the day starts
-        for (final [s, e] in cal) [toMin(s), toMin(e)],
-        [toMin(bounds[1]), 24 * 60], // busy after the day ends
-      ];
+    [0, toMin(bounds[0])], // busy before the day starts
+    for (final [s, e] in cal) [toMin(s), toMin(e)],
+    [toMin(bounds[1]), 24 * 60], // busy after the day ends
+  ];
 
   final a = withBounds(calendar1, dailyBounds1), b = withBounds(calendar2, dailyBounds2);
   // Merge the two sorted lists (like merge sort), then merge overlapping intervals.
@@ -55,12 +55,25 @@ void check(Object? got, Object? want) {
 void main() {
   check(
     calendarMatching(
-      [['9:00', '10:30'], ['12:00', '13:00'], ['16:00', '18:00']],
+      [
+        ['9:00', '10:30'],
+        ['12:00', '13:00'],
+        ['16:00', '18:00'],
+      ],
       ['9:00', '20:00'],
-      [['10:00', '11:30'], ['12:30', '14:30'], ['14:30', '15:00'], ['16:00', '17:00']],
+      [
+        ['10:00', '11:30'],
+        ['12:30', '14:30'],
+        ['14:30', '15:00'],
+        ['16:00', '17:00'],
+      ],
       ['10:00', '18:30'],
       30,
     ),
-    [['11:30', '12:00'], ['15:00', '16:00'], ['18:00', '18:30']],
+    [
+      ['11:30', '12:00'],
+      ['15:00', '16:00'],
+      ['18:00', '18:30'],
+    ],
   );
 }

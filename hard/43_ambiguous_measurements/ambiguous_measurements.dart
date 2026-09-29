@@ -35,9 +35,58 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(ambiguousMeasurements([[200, 210], [450, 465], [800, 850]], 2100, 2300), true);
-  check(ambiguousMeasurements([[1, 3], [2, 4], [5, 6]], 100, 101), false);
-  check(ambiguousMeasurements([[1, 1]], 3, 3), true);
-  check(ambiguousMeasurements([[5, 7]], 10, 13), false); // two pours give [10, 14]
-  check(ambiguousMeasurements([[5, 7]], 10, 14), true);
+  check(
+    ambiguousMeasurements(
+      [
+        [200, 210],
+        [450, 465],
+        [800, 850],
+      ],
+      2100,
+      2300,
+    ),
+    true,
+  );
+  check(
+    ambiguousMeasurements(
+      [
+        [1, 3],
+        [2, 4],
+        [5, 6],
+      ],
+      100,
+      101,
+    ),
+    false,
+  );
+  check(
+    ambiguousMeasurements(
+      [
+        [1, 1],
+      ],
+      3,
+      3,
+    ),
+    true,
+  );
+  check(
+    ambiguousMeasurements(
+      [
+        [5, 7],
+      ],
+      10,
+      13,
+    ),
+    false,
+  ); // two pours give [10, 14]
+  check(
+    ambiguousMeasurements(
+      [
+        [5, 7],
+      ],
+      10,
+      14,
+    ),
+    true,
+  );
 }

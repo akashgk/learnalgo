@@ -35,9 +35,15 @@ void main() {
   //      / \   \
   //     I   J   K
   final graph = Node('A', [
-    Node('B', [Node('E'), Node('F', [Node('I'), Node('J')])]),
+    Node('B', [
+      Node('E'),
+      Node('F', [Node('I'), Node('J')]),
+    ]),
     Node('C'),
-    Node('D', [Node('G', [Node('K')]), Node('H')]),
+    Node('D', [
+      Node('G', [Node('K')]),
+      Node('H'),
+    ]),
   ]);
   check(graph.depthFirstSearch(), ['A', 'B', 'E', 'F', 'I', 'J', 'C', 'D', 'G', 'K', 'H']);
   check((Node('X')..addChild('Y')).depthFirstSearch(), ['X', 'Y']);

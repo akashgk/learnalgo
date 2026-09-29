@@ -23,12 +23,23 @@ void check(Object? got, Object? want) {
 
 void main() {
   check(
-    tournamentWinner([
-      ['HTML', 'C#'],
-      ['C#', 'Python'],
-      ['Python', 'HTML'],
-    ], [0, 0, 1]),
+    tournamentWinner(
+      [
+        ['HTML', 'C#'],
+        ['C#', 'Python'],
+        ['Python', 'HTML'],
+      ],
+      [0, 0, 1],
+    ),
     'Python',
   );
-  check(tournamentWinner([['Bulls', 'Eagles']], [1]), 'Bulls');
+  check(
+    tournamentWinner(
+      [
+        ['Bulls', 'Eagles'],
+      ],
+      [1],
+    ),
+    'Bulls',
+  );
 }

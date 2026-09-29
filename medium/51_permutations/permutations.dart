@@ -33,7 +33,14 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(getPermutations([1, 2, 3]), [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 2, 1], [3, 1, 2]]);
+  check(getPermutations([1, 2, 3]), [
+    [1, 2, 3],
+    [1, 3, 2],
+    [2, 1, 3],
+    [2, 3, 1],
+    [3, 2, 1],
+    [3, 1, 2],
+  ]);
   check(getPermutations([]), []);
   check(getPermutations([1, 2, 3, 4, 5]).length, 120);
 }

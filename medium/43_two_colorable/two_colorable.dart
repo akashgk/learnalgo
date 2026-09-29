@@ -28,8 +28,28 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(twoColorable([[1, 2], [0, 2], [0, 1]]), false); // triangle
-  check(twoColorable([[1, 3], [0, 2], [1, 3], [0, 2]]), true); // square
-  check(twoColorable([[0]]), false); // self loop
+  check(
+    twoColorable([
+      [1, 2],
+      [0, 2],
+      [0, 1],
+    ]),
+    false,
+  ); // triangle
+  check(
+    twoColorable([
+      [1, 3],
+      [0, 2],
+      [1, 3],
+      [0, 2],
+    ]),
+    true,
+  ); // square
+  check(
+    twoColorable([
+      [0],
+    ]),
+    false,
+  ); // self loop
   check(twoColorable([[]]), true);
 }

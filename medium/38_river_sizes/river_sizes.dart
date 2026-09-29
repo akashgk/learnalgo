@@ -45,5 +45,10 @@ void main() {
     [1, 0, 1, 1, 0],
   ];
   check(riverSizes(m)..sort(), [1, 2, 2, 2, 5]);
-  check(riverSizes([[0]]), []);
+  check(
+    riverSizes([
+      [0],
+    ]),
+    [],
+  );
 }

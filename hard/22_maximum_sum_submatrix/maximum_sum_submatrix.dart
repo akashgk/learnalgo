@@ -26,7 +26,27 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(maximumSumSubmatrix([[5, 3, -1, 5], [-7, 3, 7, 4], [12, 8, 0, 0], [1, -8, -8, 2]], 2), 18);
-  check(maximumSumSubmatrix([[-1, -2], [-3, -4]], 1), -1);
-  check(maximumSumSubmatrix([[1, 2], [3, 4]], 2), 10);
+  check(
+    maximumSumSubmatrix([
+      [5, 3, -1, 5],
+      [-7, 3, 7, 4],
+      [12, 8, 0, 0],
+      [1, -8, -8, 2],
+    ], 2),
+    18,
+  );
+  check(
+    maximumSumSubmatrix([
+      [-1, -2],
+      [-3, -4],
+    ], 1),
+    -1,
+  );
+  check(
+    maximumSumSubmatrix([
+      [1, 2],
+      [3, 4],
+    ], 2),
+    10,
+  );
 }

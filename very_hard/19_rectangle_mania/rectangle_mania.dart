@@ -20,7 +20,31 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(rectangleMania([[0, 0], [0, 1], [1, 1], [1, 0], [2, 1], [2, 0], [3, 1], [3, 0]]), 6);
-  check(rectangleMania([[0, 0], [1, 1]]), 0);
-  check(rectangleMania([for (var x = 0; x < 3; x++) for (var y = 0; y < 3; y++) [x, y]]), 9);
+  check(
+    rectangleMania([
+      [0, 0],
+      [0, 1],
+      [1, 1],
+      [1, 0],
+      [2, 1],
+      [2, 0],
+      [3, 1],
+      [3, 0],
+    ]),
+    6,
+  );
+  check(
+    rectangleMania([
+      [0, 0],
+      [1, 1],
+    ]),
+    0,
+  );
+  check(
+    rectangleMania([
+      for (var x = 0; x < 3; x++)
+        for (var y = 0; y < 3; y++) [x, y],
+    ]),
+    9,
+  );
 }

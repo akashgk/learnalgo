@@ -38,8 +38,14 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(longestSubarrayWithSum([1, 2, 15, 3, 4, 5, 6, 7, 8], 30), [0, 5]); // 1+2+15+3+4+5; [4, 8] also sums to 30 but is shorter
-  check(longestSubarrayWithSumAnySign([1, 2, 15, 3, 4, 5, 6, 7, 8], 30), [0, 5]); // 1+2+15+3+4+5; [4, 8] also sums to 30 but is shorter
+  check(longestSubarrayWithSum([1, 2, 15, 3, 4, 5, 6, 7, 8], 30), [
+    0,
+    5,
+  ]); // 1+2+15+3+4+5; [4, 8] also sums to 30 but is shorter
+  check(longestSubarrayWithSumAnySign([1, 2, 15, 3, 4, 5, 6, 7, 8], 30), [
+    0,
+    5,
+  ]); // 1+2+15+3+4+5; [4, 8] also sums to 30 but is shorter
   check(longestSubarrayWithSum([0, 0, 5, 0, 0], 5), [0, 4]);
   check(longestSubarrayWithSum([1, 2, 3], 7), []);
   check(longestSubarrayWithSumAnySign([3, -1, -2, 5], 0), [0, 2]);

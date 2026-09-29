@@ -20,8 +20,45 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(mergeOverlappingIntervals([[1, 2], [3, 5], [4, 7], [6, 8], [9, 10]]), [[1, 2], [3, 8], [9, 10]]);
-  check(mergeOverlappingIntervals([[1, 22], [-20, 30]]), [[-20, 30]]);
-  check(mergeOverlappingIntervals([[1, 10], [2, 3]]), [[1, 10]]); // containment
-  check(mergeOverlappingIntervals([[1, 2], [2, 3]]), [[1, 3]]); // touching counts
+  check(
+    mergeOverlappingIntervals([
+      [1, 2],
+      [3, 5],
+      [4, 7],
+      [6, 8],
+      [9, 10],
+    ]),
+    [
+      [1, 2],
+      [3, 8],
+      [9, 10],
+    ],
+  );
+  check(
+    mergeOverlappingIntervals([
+      [1, 22],
+      [-20, 30],
+    ]),
+    [
+      [-20, 30],
+    ],
+  );
+  check(
+    mergeOverlappingIntervals([
+      [1, 10],
+      [2, 3],
+    ]),
+    [
+      [1, 10],
+    ],
+  ); // containment
+  check(
+    mergeOverlappingIntervals([
+      [1, 2],
+      [2, 3],
+    ]),
+    [
+      [1, 3],
+    ],
+  ); // touching counts
 }

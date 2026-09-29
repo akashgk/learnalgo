@@ -38,8 +38,16 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  final t1 = BinaryTree(1, BinaryTree(2, BinaryTree(4), BinaryTree(5, BinaryTree(7), BinaryTree(8))), BinaryTree(3, null, BinaryTree(6)));
-  final t2 = BinaryTree(1, BinaryTree(2, BinaryTree(4), BinaryTree(7)), BinaryTree(3, null, BinaryTree(5, BinaryTree(8), BinaryTree(6))));
+  final t1 = BinaryTree(
+    1,
+    BinaryTree(2, BinaryTree(4), BinaryTree(5, BinaryTree(7), BinaryTree(8))),
+    BinaryTree(3, null, BinaryTree(6)),
+  );
+  final t2 = BinaryTree(
+    1,
+    BinaryTree(2, BinaryTree(4), BinaryTree(7)),
+    BinaryTree(3, null, BinaryTree(5, BinaryTree(8), BinaryTree(6))),
+  );
   check(compareLeafTraversal(t1, t2), true); // leaves: 4 7 8 6
   check(compareLeafTraversal(BinaryTree(1, BinaryTree(2)), BinaryTree(1, BinaryTree(3))), false);
   check(compareLeafTraversal(BinaryTree(1, BinaryTree(2), BinaryTree(3)), BinaryTree(1, BinaryTree(2))), false);

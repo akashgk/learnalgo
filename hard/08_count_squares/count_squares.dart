@@ -26,9 +26,40 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(countSquares([[1, 1], [0, 0], [-4, 2], [-2, -1], [0, 1], [1, 0], [-1, 4]]), 2);
-  check(countSquares([[0, 0], [0, 1], [1, 1], [1, 0]]), 1);
-  check(countSquares([[0, 0], [1, 1]]), 0);
+  check(
+    countSquares([
+      [1, 1],
+      [0, 0],
+      [-4, 2],
+      [-2, -1],
+      [0, 1],
+      [1, 0],
+      [-1, 4],
+    ]),
+    2,
+  );
+  check(
+    countSquares([
+      [0, 0],
+      [0, 1],
+      [1, 1],
+      [1, 0],
+    ]),
+    1,
+  );
+  check(
+    countSquares([
+      [0, 0],
+      [1, 1],
+    ]),
+    0,
+  );
   // 2x2 grid of unit squares plus the big square plus one tilted square: 3x3 lattice has 6
-  check(countSquares([for (var x = 0; x < 3; x++) for (var y = 0; y < 3; y++) [x, y]]), 6);
+  check(
+    countSquares([
+      for (var x = 0; x < 3; x++)
+        for (var y = 0; y < 3; y++) [x, y],
+    ]),
+    6,
+  );
 }

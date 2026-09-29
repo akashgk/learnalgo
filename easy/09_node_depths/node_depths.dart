@@ -22,9 +22,8 @@ int nodeDepths(BinaryTree root) {
 }
 
 /// Recursive one-liner version for comparison.
-int nodeDepthsRecursive(BinaryTree? node, [int depth = 0]) => node == null
-    ? 0
-    : depth + nodeDepthsRecursive(node.left, depth + 1) + nodeDepthsRecursive(node.right, depth + 1);
+int nodeDepthsRecursive(BinaryTree? node, [int depth = 0]) =>
+    node == null ? 0 : depth + nodeDepthsRecursive(node.left, depth + 1) + nodeDepthsRecursive(node.right, depth + 1);
 
 void check(Object? got, Object? want) {
   if ('$got' != '$want') throw StateError('expected $want, got $got');

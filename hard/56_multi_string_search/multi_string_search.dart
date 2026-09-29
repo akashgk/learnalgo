@@ -35,9 +35,21 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(
-    multiStringSearch('this is a big string', ['this', 'yo', 'is', 'a', 'bigger', 'string', 'kappa']),
-    [true, false, true, true, false, true, false],
-  );
-  check(multiStringSearch('abcdefghijklmnopqrstuvwxyz', ['abc', 'mnopqr', 'wyz', 'no', 'e', 'tuuv']), [true, true, false, true, true, false]);
+  check(multiStringSearch('this is a big string', ['this', 'yo', 'is', 'a', 'bigger', 'string', 'kappa']), [
+    true,
+    false,
+    true,
+    true,
+    false,
+    true,
+    false,
+  ]);
+  check(multiStringSearch('abcdefghijklmnopqrstuvwxyz', ['abc', 'mnopqr', 'wyz', 'no', 'e', 'tuuv']), [
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+  ]);
 }

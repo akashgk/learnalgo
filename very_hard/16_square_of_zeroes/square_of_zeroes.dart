@@ -17,10 +17,7 @@ bool squareOfZeroes(List<List<int>> matrix) {
     for (var c = 0; c < n; c++) {
       for (var size = 2; r + size <= n && c + size <= n; size++) {
         final last = size - 1;
-        if (right[r][c] >= size &&
-            down[r][c] >= size &&
-            right[r + last][c] >= size &&
-            down[r][c + last] >= size) {
+        if (right[r][c] >= size && down[r][c] >= size && right[r + last][c] >= size && down[r][c + last] >= size) {
           return true;
         }
       }
@@ -46,7 +43,26 @@ void main() {
     ]),
     true,
   );
-  check(squareOfZeroes([[1, 1], [1, 0]]), false);
-  check(squareOfZeroes([[0, 0], [0, 0]]), true);
-  check(squareOfZeroes([[0, 1, 0], [1, 0, 1], [0, 1, 0]]), false);
+  check(
+    squareOfZeroes([
+      [1, 1],
+      [1, 0],
+    ]),
+    false,
+  );
+  check(
+    squareOfZeroes([
+      [0, 0],
+      [0, 0],
+    ]),
+    true,
+  );
+  check(
+    squareOfZeroes([
+      [0, 1, 0],
+      [1, 0, 1],
+      [0, 1, 0],
+    ]),
+    false,
+  );
 }

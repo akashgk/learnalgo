@@ -22,7 +22,12 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(semordnilap(['diaper', 'abc', 'test', 'cba', 'repaid']), [['diaper', 'repaid'], ['abc', 'cba']]);
+  check(semordnilap(['diaper', 'abc', 'test', 'cba', 'repaid']), [
+    ['diaper', 'repaid'],
+    ['abc', 'cba'],
+  ]);
   check(semordnilap(['aaa', 'bbb']), []); // palindromes pair with themselves only, not allowed
-  check(semordnilap(['dog', 'god', 'dog']), [['dog', 'god']]);
+  check(semordnilap(['dog', 'god', 'dog']), [
+    ['dog', 'god'],
+  ]);
 }

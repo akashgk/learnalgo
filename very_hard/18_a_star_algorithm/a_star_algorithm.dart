@@ -97,5 +97,11 @@ void main() {
   check(path.length, 9); // shortest path has 8 moves
   check(path.first, [0, 1]);
   check(path.last, [4, 3]);
-  check(aStarAlgorithm(0, 0, 1, 1, [[0, 1], [1, 0]]), []);
+  check(
+    aStarAlgorithm(0, 0, 1, 1, [
+      [0, 1],
+      [1, 0],
+    ]),
+    [],
+  );
 }

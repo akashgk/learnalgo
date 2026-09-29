@@ -33,10 +33,13 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(
-    longestStringChain(['abde', 'abc', 'abd', 'abcde', 'ade', 'ae', '1abde', 'abcdef']),
-    ['abcdef', 'abcde', 'abde', 'ade', 'ae'],
-  );
+  check(longestStringChain(['abde', 'abc', 'abd', 'abcde', 'ade', 'ae', '1abde', 'abcdef']), [
+    'abcdef',
+    'abcde',
+    'abde',
+    'ade',
+    'ae',
+  ]);
   check(longestStringChain(['abc', 'xyz']), []);
   check(longestStringChain(['a', 'ba', 'bca', 'bdca']), ['bdca', 'bca', 'ba', 'a']);
 }

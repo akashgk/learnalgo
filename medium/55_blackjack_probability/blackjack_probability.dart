@@ -8,9 +8,7 @@ double blackjackProbability(int target, int startingHand) {
   double bust(int hand) {
     if (hand > target) return 1;
     if (hand >= target - 4) return 0;
-    return memo[hand] ??= [for (var card = 1; card <= 10; card++) bust(hand + card)]
-            .reduce((a, b) => a + b) /
-        10;
+    return memo[hand] ??= [for (var card = 1; card <= 10; card++) bust(hand + card)].reduce((a, b) => a + b) / 10;
   }
 
   return (bust(startingHand) * 1000).round() / 1000;

@@ -51,10 +51,10 @@ void check(Object? got, Object? want) {
 }
 
 BinaryTree sample() => BinaryTree(
-      1,
-      BinaryTree(2, BinaryTree(4, BinaryTree(8), BinaryTree(9)), BinaryTree(5)),
-      BinaryTree(3, BinaryTree(6), BinaryTree(7)),
-    );
+  1,
+  BinaryTree(2, BinaryTree(4, BinaryTree(8), BinaryTree(9)), BinaryTree(5)),
+  BinaryTree(3, BinaryTree(6), BinaryTree(7)),
+);
 
 void main() {
   check(levelOrder(invertBinaryTree(sample())), [1, 3, 2, 7, 6, 5, 4, 9, 8]);

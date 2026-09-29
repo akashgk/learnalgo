@@ -27,9 +27,15 @@ void check(Object? got, Object? want) {
 
 void main() {
   final graph = Node('A', [
-    Node('B', [Node('E'), Node('F', [Node('I'), Node('J')])]),
+    Node('B', [
+      Node('E'),
+      Node('F', [Node('I'), Node('J')]),
+    ]),
     Node('C'),
-    Node('D', [Node('G', [Node('K')]), Node('H')]),
+    Node('D', [
+      Node('G', [Node('K')]),
+      Node('H'),
+    ]),
   ]);
   check(graph.breadthFirstSearch(), ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']);
 }

@@ -48,12 +48,16 @@ void check(Object? got, Object? want) {
   print('ok: $got');
 }
 
-List<List<int>> normalize(List<List<int>> qs) =>
-    [for (final q in qs) [...q]..sort()]..sort((x, y) => '$x'.compareTo('$y'));
+List<List<int>> normalize(List<List<int>> qs) => [
+  for (final q in qs) [...q]..sort(),
+]..sort((x, y) => '$x'.compareTo('$y'));
 
 void main() {
   const input = [7, 6, 4, -1, 1, 2];
-  const expected = [[7, 6, 4, -1], [7, 6, 1, 2]];
+  const expected = [
+    [7, 6, 4, -1],
+    [7, 6, 1, 2],
+  ];
   check(normalize(fourNumberSum(input, 16)), normalize(expected));
   check(normalize(fourNumberSumSorted(input, 16)), normalize(expected));
   check(fourNumberSum([1, 2, 3], 6), []);

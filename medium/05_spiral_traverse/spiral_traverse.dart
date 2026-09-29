@@ -46,8 +46,34 @@ void main() {
     ]),
     List.generate(16, (i) => i + 1),
   );
-  check(spiralTraverse([[1, 2, 3], [8, 9, 4], [7, 6, 5]]), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
-  check(spiralTraverse([[1, 2, 3, 4]]), [1, 2, 3, 4]);
-  check(spiralTraverse([[1], [2], [3]]), [1, 2, 3]);
-  check(spiralTraverse([[1, 2], [6, 3], [5, 4]]), [1, 2, 3, 4, 5, 6]);
+  check(
+    spiralTraverse([
+      [1, 2, 3],
+      [8, 9, 4],
+      [7, 6, 5],
+    ]),
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  );
+  check(
+    spiralTraverse([
+      [1, 2, 3, 4],
+    ]),
+    [1, 2, 3, 4],
+  );
+  check(
+    spiralTraverse([
+      [1],
+      [2],
+      [3],
+    ]),
+    [1, 2, 3],
+  );
+  check(
+    spiralTraverse([
+      [1, 2],
+      [6, 3],
+      [5, 4],
+    ]),
+    [1, 2, 3, 4, 5, 6],
+  );
 }

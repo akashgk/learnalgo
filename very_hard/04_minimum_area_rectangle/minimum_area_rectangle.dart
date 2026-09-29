@@ -24,7 +24,36 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(minimumAreaRectangle([[1, 5], [5, 1], [4, 2], [2, 4], [2, 2], [1, 2], [4, 5], [2, 5], [-1, -2]]), 3);
-  check(minimumAreaRectangle([[0, 0], [1, 1]]), 0);
-  check(minimumAreaRectangle([[0, 0], [0, 2], [3, 0], [3, 2], [1, 0], [1, 2]]), 2);
+  check(
+    minimumAreaRectangle([
+      [1, 5],
+      [5, 1],
+      [4, 2],
+      [2, 4],
+      [2, 2],
+      [1, 2],
+      [4, 5],
+      [2, 5],
+      [-1, -2],
+    ]),
+    3,
+  );
+  check(
+    minimumAreaRectangle([
+      [0, 0],
+      [1, 1],
+    ]),
+    0,
+  );
+  check(
+    minimumAreaRectangle([
+      [0, 0],
+      [0, 2],
+      [3, 0],
+      [3, 2],
+      [1, 0],
+      [1, 2],
+    ]),
+    2,
+  );
 }

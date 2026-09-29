@@ -68,5 +68,12 @@ void main() {
     ]),
     [-124, -1, 0, 1, 3, 5, 6, 9, 12, 20, 21, 81, 121, 150],
   );
-  check(mergeSortedArrays([[], [1], []]), [1]);
+  check(
+    mergeSortedArrays([
+      [],
+      [1],
+      [],
+    ]),
+    [1],
+  );
 }

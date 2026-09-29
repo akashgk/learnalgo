@@ -4,8 +4,7 @@
 
 List<int> subarraySort(List<int> array) {
   final n = array.length;
-  bool outOfOrder(int i) =>
-      (i > 0 && array[i] < array[i - 1]) || (i < n - 1 && array[i] > array[i + 1]);
+  bool outOfOrder(int i) => (i > 0 && array[i] < array[i - 1]) || (i < n - 1 && array[i] > array[i + 1]);
 
   int? minBad, maxBad;
   for (var i = 0; i < n; i++) {

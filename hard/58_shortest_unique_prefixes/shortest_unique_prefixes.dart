@@ -16,9 +16,7 @@ List<String> shortestUniquePrefixes(List<String> strings) {
       node.count++;
     }
   }
-  return [
-    for (final s in strings) _uniquePrefix(root, s),
-  ];
+  return [for (final s in strings) _uniquePrefix(root, s)];
 }
 
 String _uniquePrefix(_TrieNode root, String s) {

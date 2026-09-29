@@ -25,4 +25,4 @@ Given an integer array, return the maximum value of `array[a] - array[b] + array
 - Space: O(n) (O(1) with rolling variables).
 
 ## Interview notes
-- This "state machine of partial expressions" is the same idea as Best Time to Buy and Sell Stock III (at most two transactions, LeetCode #123): buy1, sell1, buy2, sell2 are exactly `-b`, `a - b`, `a - b - c`, ... patterns.
+- This "state machine of partial expressions" is the same idea as Best Time to Buy and Sell Stock III (at most two transactions, LeetCode #123). There, `buy1`, `sell1`, `buy2`, `sell2` track the best `-p1`, `-p1 + p2`, `-p1 + p2 - p3`, `-p1 + p2 - p3 + p4` over increasing days; here the stages track `a`, `a - b`, `a - b + c`, `a - b + c - d` the same way.

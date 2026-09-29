@@ -49,5 +49,13 @@ void main() {
     {'gym': false, 'school': true, 'store': true},
   ];
   check(apartmentHunting(blocks, ['gym', 'school', 'store']), 3);
-  check(apartmentHunting([{'foo': true}], ['foo']), 0);
+  check(
+    apartmentHunting(
+      [
+        {'foo': true},
+      ],
+      ['foo'],
+    ),
+    0,
+  );
 }

@@ -22,5 +22,5 @@ This problem exists to teach the standard progression you will apply to every DP
 
 ## Interview notes
 - Mention matrix exponentiation (`[[1,1],[1,0]]^n`) as the O(log n) follow-up. You rarely need to code it, but knowing it signals depth.
-- Overflow: F(93) exceeds signed 64-bit. Dart native `int` is 64-bit and wraps silently; use `BigInt` for large n.
+- Overflow: in this problem's 1-indexed sequence, the 94th term (12,200,160,415,121,876,738) is the first to exceed signed 64-bit. Dart native `int` is 64-bit and wraps silently; use `BigInt` for large n.
 - Dart note: `(prev, curr) = (curr, prev + curr)` is a record swap, no temporary variable needed.

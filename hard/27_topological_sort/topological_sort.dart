@@ -34,10 +34,26 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  const deps = [[1, 2], [1, 3], [3, 2], [4, 2], [4, 3]];
+  const deps = [
+    [1, 2],
+    [1, 3],
+    [3, 2],
+    [4, 2],
+    [4, 3],
+  ];
   final order = topologicalSort([1, 2, 3, 4], deps);
   check(order.length, 4);
   check(respects(order, deps), true);
-  check(topologicalSort([1, 2, 3], [[1, 2], [2, 3], [3, 1]]), []);
+  check(
+    topologicalSort(
+      [1, 2, 3],
+      [
+        [1, 2],
+        [2, 3],
+        [3, 1],
+      ],
+    ),
+    [],
+  );
   check(topologicalSort([1, 2], []), [1, 2]);
 }

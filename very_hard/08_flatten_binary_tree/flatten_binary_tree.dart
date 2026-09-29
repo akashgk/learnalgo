@@ -41,7 +41,11 @@ void main() {
   //     4   5 6
   //        / \
   //       7   8
-  final tree = BinaryTree(1, BinaryTree(2, BinaryTree(4), BinaryTree(5, BinaryTree(7), BinaryTree(8))), BinaryTree(3, BinaryTree(6)));
+  final tree = BinaryTree(
+    1,
+    BinaryTree(2, BinaryTree(4), BinaryTree(5, BinaryTree(7), BinaryTree(8))),
+    BinaryTree(3, BinaryTree(6)),
+  );
   final head = flattenBinaryTree(tree);
   final forward = <int>[];
   var tail = head;

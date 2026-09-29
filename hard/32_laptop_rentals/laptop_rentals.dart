@@ -23,8 +23,32 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(laptopRentals([[0, 2], [1, 4], [4, 6], [0, 4], [7, 8], [9, 11], [3, 10]]), 3);
+  check(
+    laptopRentals([
+      [0, 2],
+      [1, 4],
+      [4, 6],
+      [0, 4],
+      [7, 8],
+      [9, 11],
+      [3, 10],
+    ]),
+    3,
+  );
   check(laptopRentals([]), 0);
-  check(laptopRentals([[0, 5], [5, 10]]), 1);
-  check(laptopRentals([[0, 5], [1, 2], [1, 3]]), 3);
+  check(
+    laptopRentals([
+      [0, 5],
+      [5, 10],
+    ]),
+    1,
+  );
+  check(
+    laptopRentals([
+      [0, 5],
+      [1, 2],
+      [1, 3],
+    ]),
+    3,
+  );
 }

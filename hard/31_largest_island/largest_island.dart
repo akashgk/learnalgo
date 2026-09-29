@@ -55,8 +55,32 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(largestIsland([[0, 1, 1], [0, 0, 1], [1, 1, 0]]), 5);
-  check(largestIsland([[1, 1], [1, 1]]), 1);
-  check(largestIsland([[0, 0], [0, 0]]), 4);
-  check(largestIsland([[0, 1, 0]]), 3);
+  check(
+    largestIsland([
+      [0, 1, 1],
+      [0, 0, 1],
+      [1, 1, 0],
+    ]),
+    5,
+  );
+  check(
+    largestIsland([
+      [1, 1],
+      [1, 1],
+    ]),
+    1,
+  );
+  check(
+    largestIsland([
+      [0, 0],
+      [0, 0],
+    ]),
+    4,
+  );
+  check(
+    largestIsland([
+      [0, 1, 0],
+    ]),
+    3,
+  );
 }

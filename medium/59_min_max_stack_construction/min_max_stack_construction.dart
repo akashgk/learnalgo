@@ -16,11 +16,7 @@ class MinMaxStack {
       return;
     }
     final top = _entries.last;
-    _entries.add((
-      value: number,
-      min: number < top.min ? number : top.min,
-      max: number > top.max ? number : top.max,
-    ));
+    _entries.add((value: number, min: number < top.min ? number : top.min, max: number > top.max ? number : top.max));
   }
 }
 

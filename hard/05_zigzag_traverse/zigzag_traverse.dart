@@ -39,7 +39,27 @@ void main() {
     ]),
     List.generate(16, (i) => i + 1),
   );
-  check(zigzagTraverse([[1, 3], [2, 4], [5, 7], [6, 8]]), [1, 2, 3, 4, 5, 6, 7, 8]);
-  check(zigzagTraverse([[1, 2, 3]]), [1, 2, 3]);
-  check(zigzagTraverse([[1], [2], [3]]), [1, 2, 3]);
+  check(
+    zigzagTraverse([
+      [1, 3],
+      [2, 4],
+      [5, 7],
+      [6, 8],
+    ]),
+    [1, 2, 3, 4, 5, 6, 7, 8],
+  );
+  check(
+    zigzagTraverse([
+      [1, 2, 3],
+    ]),
+    [1, 2, 3],
+  );
+  check(
+    zigzagTraverse([
+      [1],
+      [2],
+      [3],
+    ]),
+    [1, 2, 3],
+  );
 }

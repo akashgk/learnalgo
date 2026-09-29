@@ -62,14 +62,67 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  final airports = ['BGI', 'CDG', 'DEL', 'DOH', 'DSM', 'EWR', 'EYW', 'HND', 'ICN', 'JFK', 'LGA', 'LHR', 'ORD', 'SAN', 'SFO', 'SIN', 'TLV', 'BUD'];
+  final airports = [
+    'BGI',
+    'CDG',
+    'DEL',
+    'DOH',
+    'DSM',
+    'EWR',
+    'EYW',
+    'HND',
+    'ICN',
+    'JFK',
+    'LGA',
+    'LHR',
+    'ORD',
+    'SAN',
+    'SFO',
+    'SIN',
+    'TLV',
+    'BUD',
+  ];
   final routes = [
-    ['DSM', 'ORD'], ['ORD', 'BGI'], ['BGI', 'LGA'], ['SIN', 'CDG'], ['CDG', 'SIN'], ['CDG', 'BUD'],
-    ['DEL', 'DOH'], ['DEL', 'CDG'], ['TLV', 'DEL'], ['EWR', 'HND'], ['HND', 'ICN'], ['HND', 'JFK'],
-    ['ICN', 'JFK'], ['JFK', 'LGA'], ['EYW', 'LHR'], ['LHR', 'SFO'], ['SFO', 'SAN'], ['SFO', 'DSM'],
+    ['DSM', 'ORD'],
+    ['ORD', 'BGI'],
+    ['BGI', 'LGA'],
+    ['SIN', 'CDG'],
+    ['CDG', 'SIN'],
+    ['CDG', 'BUD'],
+    ['DEL', 'DOH'],
+    ['DEL', 'CDG'],
+    ['TLV', 'DEL'],
+    ['EWR', 'HND'],
+    ['HND', 'ICN'],
+    ['HND', 'JFK'],
+    ['ICN', 'JFK'],
+    ['JFK', 'LGA'],
+    ['EYW', 'LHR'],
+    ['LHR', 'SFO'],
+    ['SFO', 'SAN'],
+    ['SFO', 'DSM'],
     ['SAN', 'EYW'],
   ];
   check(airportConnections(airports, routes, 'LGA'), 3); // e.g. LGA->TLV, LGA->SFO, LGA->EWR
-  check(airportConnections(['A', 'B'], [['A', 'B']], 'A'), 0);
-  check(airportConnections(['A', 'B', 'C'], [['B', 'C'], ['C', 'B']], 'A'), 1);
+  check(
+    airportConnections(
+      ['A', 'B'],
+      [
+        ['A', 'B'],
+      ],
+      'A',
+    ),
+    0,
+  );
+  check(
+    airportConnections(
+      ['A', 'B', 'C'],
+      [
+        ['B', 'C'],
+        ['C', 'B'],
+      ],
+      'A',
+    ),
+    1,
+  );
 }

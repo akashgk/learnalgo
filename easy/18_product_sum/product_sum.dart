@@ -35,5 +35,14 @@ void main() {
     12,
   );
   check(productSum([1, 2, 3]), 6);
-  check(productSum([<Object>[<Object>[<Object>[5]]]]), 120); // 5 * 4 * 3 * 2 * 1
+  check(
+    productSum([
+      <Object>[
+        <Object>[
+          <Object>[5],
+        ],
+      ],
+    ]),
+    120,
+  ); // 5 * 4 * 3 * 2 * 1
 }

@@ -29,8 +29,30 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(cycleInGraph([[1, 3], [2, 3, 4], [0], [], [2, 5], []]), true);
-  check(cycleInGraph([[1, 2], [2], []]), false); // diamond-ish, no cycle
-  check(cycleInGraph([[0]]), true); // self loop
+  check(
+    cycleInGraph([
+      [1, 3],
+      [2, 3, 4],
+      [0],
+      [],
+      [2, 5],
+      [],
+    ]),
+    true,
+  );
+  check(
+    cycleInGraph([
+      [1, 2],
+      [2],
+      [],
+    ]),
+    false,
+  ); // diamond-ish, no cycle
+  check(
+    cycleInGraph([
+      [0],
+    ]),
+    true,
+  ); // self loop
   check(cycleInGraph([[], []]), false);
 }

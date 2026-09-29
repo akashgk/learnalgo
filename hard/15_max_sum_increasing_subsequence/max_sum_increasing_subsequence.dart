@@ -27,8 +27,20 @@ void check(Object? got, Object? want) {
 }
 
 void main() {
-  check(maxSumIncreasingSubsequence([10, 70, 20, 30, 50, 11, 30]), [110, [10, 20, 30, 50]]);
-  check(maxSumIncreasingSubsequence([-1]), [-1, [-1]]);
-  check(maxSumIncreasingSubsequence([5, 4, 3, 2, 1]), [5, [5]]);
-  check(maxSumIncreasingSubsequence([-5, -4, -3, -2, -1]), [-1, [-1]]);
+  check(maxSumIncreasingSubsequence([10, 70, 20, 30, 50, 11, 30]), [
+    110,
+    [10, 20, 30, 50],
+  ]);
+  check(maxSumIncreasingSubsequence([-1]), [
+    -1,
+    [-1],
+  ]);
+  check(maxSumIncreasingSubsequence([5, 4, 3, 2, 1]), [
+    5,
+    [5],
+  ]);
+  check(maxSumIncreasingSubsequence([-5, -4, -3, -2, -1]), [
+    -1,
+    [-1],
+  ]);
 }
