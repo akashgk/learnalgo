@@ -12,7 +12,7 @@ const end = '<!-- CODE:END -->';
 void main(List<String> args) {
   final checkOnly = args.contains('--check');
   var stale = 0, updated = 0;
-  for (final level in ['easy', 'medium', 'hard', 'very_hard']) {
+  for (final level in ['easy', 'medium', 'hard', 'very_hard', 'more_problems']) {
     final folders = Directory(level).listSync().whereType<Directory>().toList()
       ..sort((a, b) => a.path.compareTo(b.path));
     for (final folder in folders) {

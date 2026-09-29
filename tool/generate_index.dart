@@ -4,18 +4,28 @@
 
 import 'dart:io';
 
-const _levels = {'easy': 'Easy', 'medium': 'Medium', 'hard': 'Hard', 'very_hard': 'Very Hard'};
+const _levels = {
+  'easy': 'Easy',
+  'medium': 'Medium',
+  'hard': 'Hard',
+  'very_hard': 'Very Hard',
+  'more_problems': 'More Problems (Striver A2Z, NeetCode 150, LeetCode)',
+};
 
 void main() {
   final buffer = StringBuffer();
   var total = 0;
   for (final MapEntry(key: dir, value: label) in _levels.entries) {
     final folders = Directory(dir).listSync().whereType<Directory>().toList()..sort((a, b) => a.path.compareTo(b.path));
+    // The extra set mixes difficulties and sources, so it gets two more columns.
+    final extra = dir == 'more_problems';
     buffer
       ..writeln('### $label (${folders.length})')
       ..writeln()
-      ..writeln('| # | Problem | Category | Pattern |')
-      ..writeln('|---|---|---|---|');
+      ..writeln(
+        extra ? '| # | Problem | Difficulty | Category | Pattern | Source |' : '| # | Problem | Category | Pattern |',
+      )
+      ..writeln(extra ? '|---|---|---|---|---|---|' : '|---|---|---|---|');
     for (final folder in folders) {
       final lines = File('${folder.path}/README.md').readAsLinesSync();
       final title = lines[0].replaceFirst('# ', '');
@@ -25,7 +35,12 @@ void main() {
       };
       final name = folder.uri.pathSegments.where((s) => s.isNotEmpty).last;
       final number = name.split('_').first;
-      buffer.writeln('| $number | [$title]($dir/$name/) | ${meta['Category']} | ${meta['Pattern']} |');
+      final link = '[$title]($dir/$name/)';
+      buffer.writeln(
+        extra
+            ? '| $number | $link | ${meta['Difficulty']} | ${meta['Category']} | ${meta['Pattern']} | ${meta['Source']} |'
+            : '| $number | $link | ${meta['Category']} | ${meta['Pattern']} |',
+      );
       total++;
     }
     buffer.writeln();

@@ -1,6 +1,11 @@
 # learnalgo
 
-198 AlgoExpert-style interview problems solved in modern Dart (3.9+), one folder per problem. Each folder has:
+248 interview problems solved in modern Dart (3.9+), one folder per problem:
+
+- **198 AlgoExpert-style problems** in `easy/`, `medium/`, `hard/`, `very_hard/`.
+- **50 more problems** in `more_problems/`, taken from Striver's A2Z DSA sheet, NeetCode 150 / Blind 75 and LeetCode, chosen to **not** duplicate the AlgoExpert set (for example Next Permutation, Koko Eating Bananas, Sliding Window Maximum, Word Ladder, Alien Dictionary, Burst Balloons, LFU Cache). Each lists its LeetCode number and sheet in its README header.
+
+Each folder has:
 
 - `<problem>.dart`: a runnable, self-checking solution (`dart run <file>` prints `ok:` lines and throws on any failed check).
 - `README.md`: a book-style chapter (in the spirit of Cracking the Coding Interview) that you can read on its own:
@@ -18,7 +23,8 @@ Built for FAANG-level interview preparation (Google, Microsoft, Meta, Amazon, Ap
 
 - **The problem list is reconstructed, not scraped.** AlgoExpert's catalog is paywalled. The 198 problems here match the AlgoExpert question list as I know it (names, categories, difficulty tiers), but the exact count, tiering, and a few problem definitions on the live site may differ. Problems where I was unsure of the exact definition say so explicitly in their README (search for "Statement note" or "Clarification note").
 - **Problem statements are paraphrased** in my own words. This repo is not affiliated with AlgoExpert. Use it alongside the real platform if you have access, and treat any disagreement as a prompt to re-read the official statement.
-- **Every solution is executed.** `tool/run_all.sh` runs all 198 files; CI runs `dart format` (check), `dart analyze --fatal-infos` (strict casts, inference, raw types), and every solution on each push. `tool/stress_test.dart` additionally cross-checks about 60 of the trickier solutions against independent brute-force implementations on random inputs (it caught a real infinite-loop bug in Juice Bottling during development).
+- **The `more_problems/` source labels are from memory.** The LeetCode numbers are standard. Which sheet a problem belongs to (Striver A2Z, NeetCode 150, Blind 75) is how I know those lists; the sheets get revised, so treat the labels as a guide, not an audit.
+- **Every solution is executed.** `tool/run_all.sh` runs all 248 files; CI runs `dart format` (check), `dart analyze --fatal-infos` (strict casts, inference, raw types), and every solution on each push. `tool/stress_test.dart` additionally cross-checks about 60 of the trickier solutions against independent brute-force implementations on random inputs (it caught a real infinite-loop bug in Juice Bottling during development), and `tool/stress_test_more.dart` does the same for 45 of the 50 `more_problems/` solutions.
 
 ## Running
 
@@ -28,6 +34,7 @@ dart run medium/01_three_number_sum/three_number_sum.dart
 tool/run_all.sh                       # run everything
 tool/run_all.sh hard                  # run one difficulty (any path filter works)
 dart run tool/stress_test.dart        # randomized brute-force cross-checks
+dart run tool/stress_test_more.dart   # the same for more_problems/
 dart analyze --fatal-infos
 dart format .                         # 120-column page width, set in analysis_options.yaml
 dart run tool/generate_index.dart     # rebuild the index below after adding problems
@@ -61,7 +68,7 @@ Track problems you failed; they are worth more than the ones you solved.
 6. **Test:** trace your code on the example, then edge cases. Fix bugs by reasoning, not by guessing.
 7. **Analyze:** final time and space, and what changes under follow-ups (streaming input, huge input, concurrency).
 
-## 8-week study plan by pattern
+## 10-week study plan by pattern
 
 Order matters: each week builds on the previous. Do easy -> medium -> hard within a week.
 
@@ -75,10 +82,12 @@ Order matters: each week builds on the previous. Do easy -> medium -> hard withi
 | 6 | Recursion and backtracking | easy 17-18; medium 51-56; hard 39-43; very_hard 29-30 |
 | 7 | Graphs, heaps, famous algorithms | easy 11; medium 33-43, 46; hard 26-34; very_hard 18-23 |
 | 8 | Dynamic programming | medium 28-32; hard 15-25; very_hard 12-16 |
+| 9 | Extension set, part 1: arrays, binary search on the answer, sliding window, monotonic stack/deque, linked lists | more_problems 01-23 |
+| 10 | Extension set, part 2: backtracking, trees, graphs (SCC, Floyd-Warshall, Bellman-Ford), interval/2-D DP, greedy, bits, design | more_problems 24-50 |
 
-Every problem appears exactly once. Treat very hard problems as stretch goals in the first pass; come back to them after week 8.
+Every problem appears exactly once. Treat very hard problems as stretch goals in the first pass; come back to them after week 8. Weeks 9-10 revisit every pattern with problems you have not seen, which is the best test of whether weeks 1-8 transferred.
 
-After week 8, do mixed random practice (pick problems by number with a random generator) to train **pattern recognition**, which is what interviews actually test.
+After week 10, do mixed random practice (pick problems by number with a random generator) to train **pattern recognition**, which is what interviews actually test.
 
 ## Pattern map: "when you see X, think Y"
 
@@ -103,6 +112,14 @@ After week 8, do mixed random practice (pick problems by number with a random ge
 | Optimal value over choices with overlapping subproblems | Dynamic programming | medium 29-31, hard 19 Knapsack, very_hard 12 |
 | Many string prefix queries | Trie | hard 30 Boggle Board, hard 56-58 |
 | Linked list middle / cycle / reorder | Fast-slow pointers + reversal | easy 16, hard 35, very_hard 26-27 |
+| "Minimum X such that ... works" / "maximize the minimum" | Binary search on the answer + greedy check | more 13 Koko, more 14 Split Array, more 15 Aggressive Cows |
+| Count subarrays with **exactly** k of something | atMost(k) - atMost(k - 1), or prefix sums + map | more 06, more 17 |
+| Max/min of every window | Monotonic deque | more 18 Sliding Window Maximum |
+| Sum of f over all subarrays | Contribution technique (previous/next smaller) | more 19 Sum of Subarray Minimums |
+| An action changes its neighbors | Interval DP on the last action | more 43 Burst Balloons |
+| Two agents moving together | DP with both positions in the state | more 44 Cherry Pickup II |
+| Maximize XOR | Binary trie, greedy from the top bit | more 48 |
+| Values are valid indices, O(1) space | Implicit linked list + Floyd | more 08 Find the Duplicate Number |
 
 ## Complexity cheat sheet
 
@@ -154,7 +171,7 @@ After week 8, do mixed random practice (pick problems by number with a random ge
 
 <!-- INDEX:START -->
 
-Total: 198 problems.
+Total: 248 problems.
 
 ### Easy (30)
 
@@ -373,5 +390,60 @@ Total: 198 problems.
 | 35 | [Smallest Substring Containing](very_hard/35_smallest_substring_containing/) | Strings | Variable-size sliding window with counts |
 | 36 | [Longest Balanced Substring](very_hard/36_longest_balanced_substring/) | Strings | Two counter scans (or a stack of indices) |
 | 37 | [Strings Made Up Of Strings](very_hard/37_strings_made_up_of_strings/) | Strings | Word break DP accelerated with a trie |
+
+### More Problems (Striver A2Z, NeetCode 150, LeetCode) (50)
+
+| # | Problem | Difficulty | Category | Pattern | Source |
+|---|---|---|---|---|---|
+| 01 | [Best Time to Buy and Sell Stock](more_problems/01_best_time_to_buy_and_sell_stock/) | Easy | Arrays | Running minimum (one-pass DP) | LeetCode 121; Striver A2Z, NeetCode 150 |
+| 02 | [Next Permutation](more_problems/02_next_permutation/) | Medium | Arrays | Pivot + suffix reversal | LeetCode 31; Striver A2Z |
+| 03 | [Rotate Image](more_problems/03_rotate_matrix/) | Medium | Arrays (matrix) | Transpose + reflect / layer rotation | LeetCode 48; Striver A2Z, NeetCode 150 |
+| 04 | [Set Matrix Zeroes](more_problems/04_set_matrix_zeroes/) | Medium | Arrays (matrix) | In-place marker storage | LeetCode 73; Striver A2Z |
+| 05 | [Majority Element II](more_problems/05_majority_element_ii/) | Medium | Arrays | Extended Boyer-Moore voting | LeetCode 229; Striver A2Z |
+| 06 | [Subarray Sum Equals K](more_problems/06_subarray_sum_equals_k/) | Medium | Arrays / Hashing | Prefix sum + hash map of counts | LeetCode 560; Striver A2Z, NeetCode 150 |
+| 07 | [Maximum Product Subarray](more_problems/07_maximum_product_subarray/) | Medium | Arrays / Dynamic Programming | Kadane with max and min | LeetCode 152; Striver A2Z, NeetCode 150 |
+| 08 | [Find the Duplicate Number](more_problems/08_find_the_duplicate_number/) | Medium | Arrays / Linked lists | Floyd's cycle detection on an implicit list | LeetCode 287; Striver SDE sheet, NeetCode 150 |
+| 09 | [Top K Frequent Elements](more_problems/09_top_k_frequent_elements/) | Medium | Hashing / Heaps | Bucket sort by frequency | LeetCode 347; NeetCode 150, Blind 75 |
+| 10 | [Container With Most Water](more_problems/10_container_with_most_water/) | Medium | Arrays | Two pointers (discard the provably useless end) | LeetCode 11; NeetCode 150, Blind 75 |
+| 11 | [Find Minimum in Rotated Sorted Array](more_problems/11_find_minimum_in_rotated_sorted_array/) | Medium | Binary search | Binary search on a rotated array (compare with the right end) | LeetCode 153; Striver A2Z, NeetCode 150 |
+| 12 | [Single Element in a Sorted Array](more_problems/12_single_element_in_sorted_array/) | Medium | Binary search | Binary search on a structural property (pair alignment) | LeetCode 540; Striver A2Z |
+| 13 | [Koko Eating Bananas](more_problems/13_koko_eating_bananas/) | Medium | Binary search | Binary search on the answer | LeetCode 875; Striver A2Z, NeetCode 150 |
+| 14 | [Split Array Largest Sum (Book Allocation)](more_problems/14_split_array_largest_sum/) | Hard | Binary search | Binary search on the answer + greedy check | LeetCode 410; Striver A2Z (as Book Allocation / Painter's Partition) |
+| 15 | [Aggressive Cows](more_problems/15_aggressive_cows/) | Hard | Binary search | Binary search on the answer ("maximize the minimum") | SPOJ AGGRCOW; Striver A2Z. LeetCode 1552 (Magnetic Force Between Two Balls) is the same problem. |
+| 16 | [Longest Repeating Character Replacement](more_problems/16_longest_repeating_character_replacement/) | Medium | Strings | Sliding window with a frequency count | LeetCode 424; Striver A2Z, NeetCode 150 |
+| 17 | [Binary Subarrays With Sum](more_problems/17_binary_subarrays_with_sum/) | Medium | Arrays | exactly(k) = atMost(k) - atMost(k - 1), sliding window | LeetCode 930; Striver A2Z |
+| 18 | [Sliding Window Maximum](more_problems/18_sliding_window_maximum/) | Hard | Queues / Sliding window | Monotonic deque | LeetCode 239; Striver A2Z, NeetCode 150 |
+| 19 | [Sum of Subarray Minimums](more_problems/19_sum_of_subarray_minimums/) | Medium | Stacks | Contribution technique + monotonic stack (previous/next smaller) | LeetCode 907; Striver A2Z |
+| 20 | [Remove K Digits](more_problems/20_remove_k_digits/) | Medium | Stacks / Greedy | Monotonic stack greedy | LeetCode 402; Striver A2Z |
+| 21 | [Maximal Rectangle](more_problems/21_maximal_rectangle/) | Hard | Stacks / Dynamic Programming | Reduce to Largest Rectangle in Histogram, row by row | LeetCode 85; Striver A2Z |
+| 22 | [Copy List with Random Pointer](more_problems/22_copy_list_with_random_pointer/) | Medium | Linked lists | Hash map old -> new, or interleave copies | LeetCode 138; Striver A2Z, NeetCode 150 |
+| 23 | [Reverse Nodes in k-Group](more_problems/23_reverse_nodes_in_k_group/) | Hard | Linked lists | In-place reversal of sublists with a dummy head | LeetCode 25; Striver A2Z, NeetCode 150 |
+| 24 | [Combination Sum](more_problems/24_combination_sum/) | Medium | Recursion / Backtracking | Backtracking with a start index (unbounded choices) | LeetCode 39; Striver A2Z, NeetCode 150 |
+| 25 | [Subsets II](more_problems/25_subsets_ii/) | Medium | Recursion / Backtracking | Backtracking with duplicate skipping at the same depth | LeetCode 90; Striver A2Z, NeetCode 150 |
+| 26 | [Word Search](more_problems/26_word_search/) | Medium | Recursion / Backtracking | Grid DFS with in-place visited marking | LeetCode 79; Striver A2Z, NeetCode 150 |
+| 27 | [Palindrome Partitioning](more_problems/27_palindrome_partitioning/) | Medium | Recursion / Backtracking | Backtracking over cut positions + palindrome DP table | LeetCode 131; Striver A2Z, NeetCode 150 |
+| 28 | [Permutation Sequence](more_problems/28_permutation_sequence/) | Hard | Recursion / Math | Factorial number system | LeetCode 60; Striver A2Z |
+| 29 | [Vertical Order Traversal of a Binary Tree](more_problems/29_vertical_order_traversal/) | Hard | Binary trees | Coordinate labeling + sort | LeetCode 987; Striver A2Z |
+| 30 | [Construct Binary Tree from Preorder and Inorder Traversal](more_problems/30_construct_binary_tree_from_preorder_inorder/) | Medium | Binary trees | Divide and conquer with an index map | LeetCode 105; Striver A2Z, NeetCode 150 |
+| 31 | [Serialize and Deserialize Binary Tree](more_problems/31_serialize_and_deserialize_binary_tree/) | Hard | Binary trees | Preorder with null markers | LeetCode 297; Striver A2Z, NeetCode 150 |
+| 32 | [Morris Inorder Traversal](more_problems/32_morris_inorder_traversal/) | Medium | Binary trees | Threaded binary tree (temporary links) | Striver A2Z (Morris traversal); LeetCode 94 with an O(1)-space follow-up |
+| 33 | [Word Ladder](more_problems/33_word_ladder/) | Hard | Graphs | BFS on an implicit graph | LeetCode 127; Striver A2Z, NeetCode 150 |
+| 34 | [Alien Dictionary](more_problems/34_alien_dictionary/) | Hard | Graphs | Build a precedence graph, then topological sort | LeetCode 269 (premium); Striver A2Z, NeetCode 150 |
+| 35 | [Cheapest Flights Within K Stops](more_problems/35_cheapest_flights_within_k_stops/) | Medium | Graphs | Bellman-Ford limited to k + 1 rounds | LeetCode 787; Striver A2Z, NeetCode 150 |
+| 36 | [Accounts Merge](more_problems/36_accounts_merge/) | Medium | Graphs | Union-find (disjoint set union) keyed by shared attributes | LeetCode 721; Striver A2Z |
+| 37 | [Strongly Connected Components (Kosaraju)](more_problems/37_kosaraju_scc/) | Hard | Graphs | Two-pass DFS (finish order, then reversed graph) | Striver A2Z (Kosaraju's algorithm); classic algorithm |
+| 38 | [Floyd-Warshall (All-Pairs Shortest Paths)](more_problems/38_floyd_warshall/) | Medium | Graphs | DP over allowed intermediate vertices | Striver A2Z; LeetCode 1334 is a direct application |
+| 39 | [Partition Equal Subset Sum](more_problems/39_partition_equal_subset_sum/) | Medium | Dynamic Programming | 0/1 knapsack reachability (subset sum) | LeetCode 416; Striver A2Z, NeetCode 150 |
+| 40 | [Longest Palindromic Subsequence](more_problems/40_longest_palindromic_subsequence/) | Medium | Dynamic Programming | Interval DP (or LCS of the string and its reverse) | LeetCode 516; Striver A2Z |
+| 41 | [Distinct Subsequences](more_problems/41_distinct_subsequences/) | Hard | Dynamic Programming | Two-string DP (counting) | LeetCode 115; Striver A2Z, NeetCode 150 |
+| 42 | [Wildcard Matching](more_problems/42_wildcard_matching/) | Hard | Dynamic Programming | Two-string DP over prefixes | LeetCode 44; Striver A2Z |
+| 43 | [Burst Balloons](more_problems/43_burst_balloons/) | Hard | Dynamic Programming | Interval DP on the last action | LeetCode 312; Striver A2Z, NeetCode 150 |
+| 44 | [Cherry Pickup II](more_problems/44_cherry_pickup_ii/) | Hard | Dynamic Programming | 3-D grid DP with two agents moving in lockstep | LeetCode 1463; Striver A2Z (as "Ninja and his friends") |
+| 45 | [Non-overlapping Intervals](more_problems/45_non_overlapping_intervals/) | Medium | Greedy | Interval scheduling (sort by end) | LeetCode 435; Striver A2Z, NeetCode 150 |
+| 46 | [Valid Parenthesis String](more_problems/46_valid_parenthesis_string/) | Medium | Greedy / Strings | Track the range of possible open counts | LeetCode 678; Striver A2Z, NeetCode 150 |
+| 47 | [Task Scheduler](more_problems/47_task_scheduler/) | Medium | Greedy / Heaps | Counting argument around the most frequent task | LeetCode 621; NeetCode 150 |
+| 48 | [Maximum XOR of Two Numbers in an Array](more_problems/48_maximum_xor_of_two_numbers/) | Hard | Tries / Bit manipulation | Binary trie with greedy opposite-bit walk | LeetCode 421; Striver A2Z |
+| 49 | [Single Number III](more_problems/49_single_number_iii/) | Medium | Bit manipulation | XOR, then partition by a differing bit | LeetCode 260; Striver A2Z |
+| 50 | [LFU Cache](more_problems/50_lfu_cache/) | Hard | Design | Hash maps + per-frequency doubly linked lists + min-frequency pointer | LeetCode 460; Striver A2Z |
 
 <!-- INDEX:END -->
