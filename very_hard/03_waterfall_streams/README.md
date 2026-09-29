@@ -2,21 +2,121 @@
 
 **Difficulty:** Very Hard | **Category:** Arrays | **Pattern:** Row-by-row simulation with fractional flow
 
-## Problem
-A grid has empty cells (0) and blocks (1). Water is poured at column `source` of the top row and falls downward. When a stream hits a block, it splits into two equal halves, one moving left and one moving right along the row it is in, each continuing sideways until there is an empty cell below it, where it falls again. A half that runs into a block or the edge of the grid while moving sideways is lost. Return, for each column of the bottom row, the percentage of the original water that ends there.
+## The problem
 
-## Building up the logic
-1. Water only moves down or sideways, never up, so process the grid **row by row**, carrying a vector of how much water sits in each column.
-2. For each column with water in row `r - 1`:
-   - if the cell below (row `r`) is empty, the water falls straight down;
-   - if it is a block, split in half; each half walks sideways in row `r - 1` until it finds a column whose cell in row `r` is empty (then it falls there) or it hits a block in row `r - 1` / the edge (then it is lost).
-3. Different streams can land in the same column; add their amounts.
-4. Multiply by 100 at the end.
+A grid contains empty cells (0) and blocks (1). Water is poured at column `source` of the top row and falls **down**. When a stream falls onto a block, it **splits in two equal halves**: one half flows left and the other right, **along the row the water is currently in** (the row above the block), until each half finds an empty cell below it, where it falls again. A half that runs into a block in its row, or into the edge of the grid, is **lost**. Return, for each column of the bottom row, the **percentage** of the original water that ends up there.
+
+```
+grid (source = 3):
+[0, 0, 0, 0, 0, 0, 0]
+[1, 0, 0, 0, 0, 0, 0]
+[0, 0, 1, 1, 1, 0, 0]
+[0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 0, 0, 1, 0]
+[0, 0, 0, 0, 0, 0, 1]
+[0, 0, 0, 0, 0, 0, 0]
+->  [0, 0, 0, 25, 25, 0, 0]
+```
+
+## Step 1: Choose the state
+
+Water only moves down or sideways, never up. So process the grid **row by row**. The state is simply: how much water sits in each column of the current row (a list of fractions, starting with 1.0 at the source).
+
+Keeping "where the water is" separate from "what the grid looks like" makes the simulation much easier to reason about than writing water values into the grid.
+
+## Step 2: One row transition
+
+For each column `c` carrying water `amount` in row `r - 1`:
+
+- If the cell below (`row[c]`) is empty, all the water falls straight down: `next[c] += amount`.
+- If it is a block, split: `half = amount / 2`.
+  - Walk right from `c + 1`: if the cell in the **current** row (`above[k]`) is a block, the half is stuck and lost; if the cell below (`row[k]`) is empty, the half falls there. If you run off the edge, the half is lost.
+  - Walk left symmetrically.
+
+Different streams can land in the same column; add them up.
+
+## Step 3: The code
+
+<!-- CODE:START -->
+
+Full source: [`waterfall_streams.dart`](waterfall_streams.dart) (run it with `dart run`).
+
+```dart
+// Waterfall Streams: grid of 0 (empty) / 1 (block). Water is poured at `source` in the top row.
+// It falls straight down; on hitting a block it splits in half, each half moving sideways along
+// its current row until it can fall again. A half that hits a block or the grid edge while moving
+// sideways is lost. Return the percentage of water reaching each bottom-row column.
+// O(w^2 * h) time, O(w) space.
+
+List<double> waterfallStreams(List<List<double>> array, int source) {
+  final width = array[0].length;
+  var water = List<double>.filled(width, 0)..[source] = 1.0; // water in the current row
+  for (var r = 1; r < array.length; r++) {
+    final above = array[r - 1], row = array[r];
+    final next = List<double>.filled(width, 0);
+    for (var c = 0; c < width; c++) {
+      final amount = water[c];
+      if (amount == 0) continue;
+      if (row[c] != 1) {
+        next[c] += amount; // falls straight down
+        continue;
+      }
+      final half = amount / 2;
+      // Move right along the row above until there is an opening below.
+      for (var k = c + 1; k < width; k++) {
+        if (above[k] == 1) break; // blocked sideways: this half is lost
+        if (row[k] != 1) {
+          next[k] += half;
+          break;
+        }
+      }
+      for (var k = c - 1; k >= 0; k--) {
+        if (above[k] == 1) break;
+        if (row[k] != 1) {
+          next[k] += half;
+          break;
+        }
+      }
+    }
+    water = next;
+  }
+  return [for (final w in water) w * 100];
+}
+```
+
+<!-- CODE:END -->
+
+### Walkthrough
+
+- `water` is the current row's amounts; `next` is being built for the row below.
+- `above` is the row the water is in (where it moves sideways); `row` is the row it tries to fall into.
+- The two `for (k ...)` loops walk sideways and `break` when the half lands or is blocked.
+- The last line converts fractions to percentages.
+
+## Step 4: Dry run (water per column, generated by simulating the algorithm)
+
+| after row | water (fractions per column 0..6) | what happened |
+|---|---|---|
+| 0 | 0, 0, 0, 1, 0, 0, 0 | poured at column 3 |
+| 1 | 0, 0, 0, 1, 0, 0, 0 | falls through (row 1, column 3 is empty) |
+| 2 | 0, 0.5, 0, 0, 0, 0.5, 0 | hits the block at (2, 3): halves slide to columns 1 and 5 |
+| 3 | 0, 0.5, 0, 0, 0, 0.5, 0 | falls |
+| 4 | 0, 0, 0, 0.25, 0.25, 0, 0.25 | column 1 hits a block: right half lands at 3, left half hits the edge (lost); column 5 hits a block: halves land at 4 and 6 |
+| 5 | 0, 0, 0, 0.25, 0.25, 0, 0 | column 6 hits a block: right is the edge (lost), left is blocked by the block at (4, 5) (lost) |
+| 6 | 0, 0, 0, 0.25, 0.25, 0, 0 | falls |
+
+Result: `[0, 0, 0, 25, 25, 0, 0]` (50% of the water was lost).
 
 ## Complexity
-- Time: O(w^2 * h): each of w columns may walk up to w cells sideways in each of h rows.
-- Space: O(w): only two rows of water amounts.
 
-## Interview notes
-- Simulation problems are graded on clean state representation. Keep "where the water is" separate from "what the grid looks like"; overloading the grid (e.g. negative numbers for water) works but is harder to reason about.
-- State the rules you assume (lost at edges, halves are equal) and confirm them with the interviewer.
+- **Time: O(w^2 * h)**: in each of h rows, each of w columns may walk up to w cells sideways.
+- **Space: O(w)**: two rows of amounts.
+
+## Common mistakes
+
+- Checking blocks in the wrong row while moving sideways (it is the row the water is **in**, not the row below).
+- Mutating the current row while computing the next one (use a separate `next` list).
+
+## What to remember
+
+For simulations, pick a minimal state (here: water per column), define one step (one row), and keep the static world (the grid) separate from the moving state. State the rules you assume and confirm them.
