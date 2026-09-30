@@ -13,3 +13,4 @@ jobs:
       - run: tool/run_all.sh
       - run: dart run tool/stress_test.dart
       - run: dart run tool/stress_test_more.dart
+      - run: dart run tool/stress_test_neetcode.dart

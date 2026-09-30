@@ -1,6 +1,6 @@
 # Set Matrix Zeroes
 
-**Difficulty:** Medium | **Category:** Arrays (matrix) | **Pattern:** In-place marker storage | **Source:** LeetCode 73; Striver A2Z
+**Difficulty:** Medium | **Category:** Arrays (matrix) | **Pattern:** In-place marker storage | **Source:** LeetCode 73; Striver A2Z, NeetCode 150
 
 ## The problem
 

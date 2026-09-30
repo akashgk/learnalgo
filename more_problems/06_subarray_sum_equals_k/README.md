@@ -1,6 +1,6 @@
 # Subarray Sum Equals K
 
-**Difficulty:** Medium | **Category:** Arrays / Hashing | **Pattern:** Prefix sum + hash map of counts | **Source:** LeetCode 560; Striver A2Z, NeetCode 150
+**Difficulty:** Medium | **Category:** Arrays / Hashing | **Pattern:** Prefix sum + hash map of counts | **Source:** LeetCode 560; Striver A2Z
 
 ## The problem
 

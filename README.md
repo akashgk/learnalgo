@@ -1,9 +1,10 @@
 # learnalgo
 
-248 interview problems solved in modern Dart (3.9+), one folder per problem:
+308 interview problems solved in modern Dart (3.9+), one folder per problem:
 
 - **198 AlgoExpert-style problems** in `easy/`, `medium/`, `hard/`, `very_hard/`.
 - **50 more problems** in `more_problems/`, taken from Striver's A2Z DSA sheet, NeetCode 150 / Blind 75 and LeetCode, chosen to **not** duplicate the AlgoExpert set (for example Next Permutation, Koko Eating Bananas, Sliding Window Maximum, Word Ladder, Alien Dictionary, Burst Balloons, LFU Cache). Each lists its LeetCode number and sheet in its README header.
+- **60 NeetCode 150 problems** in `neetcode/`: the part of the NeetCode 150 not already covered above. With them, **every NeetCode 150 problem is solved in this repo**; [`neetcode/README.md`](neetcode/README.md) maps all 150 to their folders, in NeetCode's roadmap order.
 
 Each folder has:
 
@@ -24,7 +25,7 @@ Built for FAANG-level interview preparation (Google, Microsoft, Meta, Amazon, Ap
 - **The problem list is reconstructed, not scraped.** AlgoExpert's catalog is paywalled. The 198 problems here match the AlgoExpert question list as I know it (names, categories, difficulty tiers), but the exact count, tiering, and a few problem definitions on the live site may differ. Problems where I was unsure of the exact definition say so explicitly in their README (search for "Statement note" or "Clarification note").
 - **Problem statements are paraphrased** in my own words. This repo is not affiliated with AlgoExpert. Use it alongside the real platform if you have access, and treat any disagreement as a prompt to re-read the official statement.
 - **The `more_problems/` source labels are from memory.** The LeetCode numbers are standard. Which sheet a problem belongs to (Striver A2Z, NeetCode 150, Blind 75) is how I know those lists; the sheets get revised, so treat the labels as a guide, not an audit.
-- **Every solution is executed.** `tool/run_all.sh` runs all 248 files; CI runs `dart format` (check), `dart analyze --fatal-infos` (strict casts, inference, raw types), and every solution on each push. `tool/stress_test.dart` additionally cross-checks about 60 of the trickier solutions against independent brute-force implementations on random inputs (it caught a real infinite-loop bug in Juice Bottling during development), and `tool/stress_test_more.dart` does the same for 45 of the 50 `more_problems/` solutions.
+- **Every solution is executed.** `tool/run_all.sh` runs all 308 files; CI runs `dart format` (check), `dart analyze --fatal-infos` (strict casts, inference, raw types), and every solution on each push. `tool/stress_test.dart` additionally cross-checks about 60 of the trickier solutions against independent brute-force implementations on random inputs (it caught a real infinite-loop bug in Juice Bottling during development), `tool/stress_test_more.dart` does the same for 45 of the 50 `more_problems/` solutions, and `tool/stress_test_neetcode.dart` for 55 of the 60 `neetcode/` solutions.
 
 ## Running
 
@@ -35,6 +36,7 @@ tool/run_all.sh                       # run everything
 tool/run_all.sh hard                  # run one difficulty (any path filter works)
 dart run tool/stress_test.dart        # randomized brute-force cross-checks
 dart run tool/stress_test_more.dart   # the same for more_problems/
+dart run tool/stress_test_neetcode.dart   # the same for neetcode/
 dart analyze --fatal-infos
 dart format .                         # 120-column page width, set in analysis_options.yaml
 dart run tool/generate_index.dart     # rebuild the index below after adding problems
@@ -68,7 +70,7 @@ Track problems you failed; they are worth more than the ones you solved.
 6. **Test:** trace your code on the example, then edge cases. Fix bugs by reasoning, not by guessing.
 7. **Analyze:** final time and space, and what changes under follow-ups (streaming input, huge input, concurrency).
 
-## 10-week study plan by pattern
+## 12-week study plan by pattern
 
 Order matters: each week builds on the previous. Do easy -> medium -> hard within a week.
 
@@ -84,10 +86,12 @@ Order matters: each week builds on the previous. Do easy -> medium -> hard withi
 | 8 | Dynamic programming | medium 28-32; hard 15-25; very_hard 12-16 |
 | 9 | Extension set, part 1: arrays, binary search on the answer, sliding window, monotonic stack/deque, linked lists | more_problems 01-23 |
 | 10 | Extension set, part 2: backtracking, trees, graphs (SCC, Floyd-Warshall, Bellman-Ford), interval/2-D DP, greedy, bits, design | more_problems 24-50 |
+| 11 | NeetCode gap-fill, part 1: hashing, sliding window, stacks, binary search, trees, tries, heaps, graphs | neetcode 01-32 |
+| 12 | NeetCode gap-fill, part 2: 1-D and 2-D DP, greedy, intervals, math, bit manipulation | neetcode 33-60 |
 
-Every problem appears exactly once. Treat very hard problems as stretch goals in the first pass; come back to them after week 8. Weeks 9-10 revisit every pattern with problems you have not seen, which is the best test of whether weeks 1-8 transferred.
+Every problem appears exactly once. Treat very hard problems as stretch goals in the first pass; come back to them after week 8. Weeks 9-12 revisit every pattern with problems you have not seen, which is the best test of whether weeks 1-8 transferred. If you prefer to follow the NeetCode roadmap instead, use the map in [`neetcode/README.md`](neetcode/README.md): it covers 150 of the 308 problems in NeetCode's order.
 
-After week 10, do mixed random practice (pick problems by number with a random generator) to train **pattern recognition**, which is what interviews actually test.
+After week 12, do mixed random practice (pick problems by number with a random generator) to train **pattern recognition**, which is what interviews actually test.
 
 ## Pattern map: "when you see X, think Y"
 
@@ -171,7 +175,7 @@ After week 10, do mixed random practice (pick problems by number with a random g
 
 <!-- INDEX:START -->
 
-Total: 248 problems.
+Total: 308 problems.
 
 ### Easy (30)
 
@@ -398,9 +402,9 @@ Total: 248 problems.
 | 01 | [Best Time to Buy and Sell Stock](more_problems/01_best_time_to_buy_and_sell_stock/) | Easy | Arrays | Running minimum (one-pass DP) | LeetCode 121; Striver A2Z, NeetCode 150 |
 | 02 | [Next Permutation](more_problems/02_next_permutation/) | Medium | Arrays | Pivot + suffix reversal | LeetCode 31; Striver A2Z |
 | 03 | [Rotate Image](more_problems/03_rotate_matrix/) | Medium | Arrays (matrix) | Transpose + reflect / layer rotation | LeetCode 48; Striver A2Z, NeetCode 150 |
-| 04 | [Set Matrix Zeroes](more_problems/04_set_matrix_zeroes/) | Medium | Arrays (matrix) | In-place marker storage | LeetCode 73; Striver A2Z |
+| 04 | [Set Matrix Zeroes](more_problems/04_set_matrix_zeroes/) | Medium | Arrays (matrix) | In-place marker storage | LeetCode 73; Striver A2Z, NeetCode 150 |
 | 05 | [Majority Element II](more_problems/05_majority_element_ii/) | Medium | Arrays | Extended Boyer-Moore voting | LeetCode 229; Striver A2Z |
-| 06 | [Subarray Sum Equals K](more_problems/06_subarray_sum_equals_k/) | Medium | Arrays / Hashing | Prefix sum + hash map of counts | LeetCode 560; Striver A2Z, NeetCode 150 |
+| 06 | [Subarray Sum Equals K](more_problems/06_subarray_sum_equals_k/) | Medium | Arrays / Hashing | Prefix sum + hash map of counts | LeetCode 560; Striver A2Z |
 | 07 | [Maximum Product Subarray](more_problems/07_maximum_product_subarray/) | Medium | Arrays / Dynamic Programming | Kadane with max and min | LeetCode 152; Striver A2Z, NeetCode 150 |
 | 08 | [Find the Duplicate Number](more_problems/08_find_the_duplicate_number/) | Medium | Arrays / Linked lists | Floyd's cycle detection on an implicit list | LeetCode 287; Striver SDE sheet, NeetCode 150 |
 | 09 | [Top K Frequent Elements](more_problems/09_top_k_frequent_elements/) | Medium | Hashing / Heaps | Bucket sort by frequency | LeetCode 347; NeetCode 150, Blind 75 |
@@ -445,5 +449,70 @@ Total: 248 problems.
 | 48 | [Maximum XOR of Two Numbers in an Array](more_problems/48_maximum_xor_of_two_numbers/) | Hard | Tries / Bit manipulation | Binary trie with greedy opposite-bit walk | LeetCode 421; Striver A2Z |
 | 49 | [Single Number III](more_problems/49_single_number_iii/) | Medium | Bit manipulation | XOR, then partition by a differing bit | LeetCode 260; Striver A2Z |
 | 50 | [LFU Cache](more_problems/50_lfu_cache/) | Hard | Design | Hash maps + per-frequency doubly linked lists + min-frequency pointer | LeetCode 460; Striver A2Z |
+
+### NeetCode 150 (the rest of the list; see neetcode/README.md for the full map) (60)
+
+| # | Problem | Difficulty | Category | Pattern | Source |
+|---|---|---|---|---|---|
+| 01 | [Contains Duplicate](neetcode/01_contains_duplicate/) | Easy | Arrays & Hashing | Hash set membership | LeetCode 217; NeetCode 150, Blind 75 |
+| 02 | [Valid Anagram](neetcode/02_valid_anagram/) | Easy | Arrays & Hashing | Frequency counting | LeetCode 242; NeetCode 150, Blind 75 |
+| 03 | [Encode and Decode Strings](neetcode/03_encode_and_decode_strings/) | Medium | Arrays & Hashing | Length-prefix framing | LeetCode 271 (premium); NeetCode 150, Blind 75 |
+| 04 | [Valid Sudoku](neetcode/04_valid_sudoku/) | Medium | Arrays & Hashing | Hash sets per constraint group | LeetCode 36; NeetCode 150 |
+| 05 | [Valid Palindrome](neetcode/05_valid_palindrome/) | Easy | Two Pointers | Two pointers skipping ignored characters | LeetCode 125; NeetCode 150, Blind 75 |
+| 06 | [Permutation in String](neetcode/06_permutation_in_string/) | Medium | Sliding Window | Fixed-size window with a "matches" counter | LeetCode 567; NeetCode 150 |
+| 07 | [Daily Temperatures](neetcode/07_daily_temperatures/) | Medium | Stack | Monotonic stack (next greater element, as a distance) | LeetCode 739; NeetCode 150 |
+| 08 | [Car Fleet](neetcode/08_car_fleet/) | Medium | Stack | Sort by position, compare arrival times | LeetCode 853; NeetCode 150 |
+| 09 | [Search a 2D Matrix](neetcode/09_search_a_2d_matrix/) | Medium | Binary Search | Binary search over a virtual flattened array | LeetCode 74; NeetCode 150 |
+| 10 | [Time Based Key-Value Store](neetcode/10_time_based_key_value_store/) | Medium | Binary Search | Per-key sorted history + "last <= x" binary search | LeetCode 981; NeetCode 150 |
+| 11 | [Merge k Sorted Lists](neetcode/11_merge_k_sorted_lists/) | Hard | Linked List / Heap | k-way merge with a min-heap, or pairwise divide and conquer | LeetCode 23; NeetCode 150, Blind 75 |
+| 12 | [Maximum Depth of Binary Tree](neetcode/12_maximum_depth_of_binary_tree/) | Easy | Trees | Bottom-up DFS, or BFS level counting | LeetCode 104; NeetCode 150, Blind 75 |
+| 13 | [Same Tree](neetcode/13_same_tree/) | Easy | Trees | Simultaneous DFS on two trees | LeetCode 100; NeetCode 150, Blind 75 |
+| 14 | [Subtree of Another Tree](neetcode/14_subtree_of_another_tree/) | Easy | Trees | Same Tree at every node (or serialize + string search) | LeetCode 572; NeetCode 150, Blind 75 |
+| 15 | [Lowest Common Ancestor of a Binary Search Tree](neetcode/15_lowest_common_ancestor_of_bst/) | Medium | Trees | Walk down using BST ordering | LeetCode 235; NeetCode 150, Blind 75 |
+| 16 | [Binary Tree Level Order Traversal](neetcode/16_binary_tree_level_order_traversal/) | Medium | Trees | BFS with per-level batching | LeetCode 102; NeetCode 150, Blind 75 |
+| 17 | [Binary Tree Right Side View](neetcode/17_binary_tree_right_side_view/) | Medium | Trees | DFS right-first recording the first node per depth (or BFS last per level) | LeetCode 199; NeetCode 150 |
+| 18 | [Count Good Nodes in Binary Tree](neetcode/18_count_good_nodes_in_binary_tree/) | Medium | Trees | Top-down DFS carrying the path maximum | LeetCode 1448; NeetCode 150 |
+| 19 | [Implement Trie (Prefix Tree)](neetcode/19_implement_trie/) | Medium | Tries | Character-indexed tree with end-of-word flags | LeetCode 208; NeetCode 150, Blind 75 |
+| 20 | [Design Add and Search Words Data Structure](neetcode/20_design_add_and_search_words/) | Medium | Tries | Trie + DFS branching on wildcards | LeetCode 211; NeetCode 150, Blind 75 |
+| 21 | [Kth Largest Element in a Stream](neetcode/21_kth_largest_element_in_a_stream/) | Easy | Heap / Priority Queue | Size-k min-heap | LeetCode 703; NeetCode 150 |
+| 22 | [Last Stone Weight](neetcode/22_last_stone_weight/) | Easy | Heap / Priority Queue | Max-heap simulation | LeetCode 1046; NeetCode 150 |
+| 23 | [K Closest Points to Origin](neetcode/23_k_closest_points_to_origin/) | Medium | Heap / Priority Queue | Size-k max-heap (or quickselect) | LeetCode 973; NeetCode 150 |
+| 24 | [Design Twitter](neetcode/24_design_twitter/) | Medium | Heap / Design | Per-user timelines + k-way merge with a heap | LeetCode 355; NeetCode 150 |
+| 25 | [Combination Sum II](neetcode/25_combination_sum_ii/) | Medium | Backtracking | Start index + no reuse + skip duplicates at the same depth | LeetCode 40; NeetCode 150 |
+| 26 | [Clone Graph](neetcode/26_clone_graph/) | Medium | Graphs | DFS/BFS with an original -> copy map | LeetCode 133; NeetCode 150, Blind 75 |
+| 27 | [Pacific Atlantic Water Flow](neetcode/27_pacific_atlantic_water_flow/) | Medium | Graphs | Reverse the flow: multi-source DFS from the borders | LeetCode 417; NeetCode 150, Blind 75 |
+| 28 | [Walls and Gates](neetcode/28_walls_and_gates/) | Medium | Graphs | Multi-source BFS | LeetCode 286 (premium); NeetCode 150 |
+| 29 | [Redundant Connection](neetcode/29_redundant_connection/) | Medium | Graphs | Union-find cycle detection | LeetCode 684; NeetCode 150 |
+| 30 | [Graph Valid Tree](neetcode/30_graph_valid_tree/) | Medium | Graphs | Edge count + union-find (or DFS) | LeetCode 261 (premium); NeetCode 150, Blind 75 |
+| 31 | [Reconstruct Itinerary](neetcode/31_reconstruct_itinerary/) | Hard | Advanced Graphs | Eulerian path (Hierholzer's algorithm) | LeetCode 332; NeetCode 150 |
+| 32 | [Swim in Rising Water](neetcode/32_swim_in_rising_water/) | Hard | Advanced Graphs | Minimax path: Dijkstra on the maximum (or binary search + BFS) | LeetCode 778; NeetCode 150 |
+| 33 | [Min Cost Climbing Stairs](neetcode/33_min_cost_climbing_stairs/) | Easy | 1-D Dynamic Programming | Linear DP with two variables | LeetCode 746; NeetCode 150 |
+| 34 | [House Robber II](neetcode/34_house_robber_ii/) | Medium | 1-D Dynamic Programming | Break the circle into two lines | LeetCode 213; NeetCode 150, Blind 75 |
+| 35 | [Palindromic Substrings](neetcode/35_palindromic_substrings/) | Medium | 1-D Dynamic Programming | Expand around centers | LeetCode 647; NeetCode 150, Blind 75 |
+| 36 | [Decode Ways](neetcode/36_decode_ways/) | Medium | 1-D Dynamic Programming | Linear DP over the last one or two characters | LeetCode 91; NeetCode 150, Blind 75 |
+| 37 | [Word Break](neetcode/37_word_break/) | Medium | 1-D Dynamic Programming | Prefix DP over split points | LeetCode 139; NeetCode 150, Blind 75 |
+| 38 | [Best Time to Buy and Sell Stock with Cooldown](neetcode/38_best_time_to_buy_and_sell_stock_with_cooldown/) | Medium | 2-D Dynamic Programming | State machine DP | LeetCode 309; NeetCode 150 |
+| 39 | [Target Sum](neetcode/39_target_sum/) | Medium | 2-D Dynamic Programming | Reduce to subset-sum counting | LeetCode 494; NeetCode 150 |
+| 40 | [Longest Increasing Path in a Matrix](neetcode/40_longest_increasing_path_in_a_matrix/) | Hard | 2-D Dynamic Programming | Memoized DFS on a DAG | LeetCode 329; NeetCode 150 |
+| 41 | [Regular Expression Matching](neetcode/41_regular_expression_matching/) | Hard | 2-D Dynamic Programming | Two-string DP with a lookahead for `*` | LeetCode 10; NeetCode 150 |
+| 42 | [Jump Game](neetcode/42_jump_game/) | Medium | Greedy | Track the farthest reachable index | LeetCode 55; NeetCode 150, Blind 75 |
+| 43 | [Hand of Straights](neetcode/43_hand_of_straights/) | Medium | Greedy | Smallest element must start a group | LeetCode 846; NeetCode 150 |
+| 44 | [Merge Triplets to Form Target Triplet](neetcode/44_merge_triplets_to_form_target_triplet/) | Medium | Greedy | Filter what can never be used, then merge everything else | LeetCode 1899; NeetCode 150 |
+| 45 | [Partition Labels](neetcode/45_partition_labels/) | Medium | Greedy | Extend the current part to the last occurrence of every letter in it | LeetCode 763; NeetCode 150 |
+| 46 | [Insert Interval](neetcode/46_insert_interval/) | Medium | Intervals | Three-phase linear scan | LeetCode 57; NeetCode 150, Blind 75 |
+| 47 | [Meeting Rooms](neetcode/47_meeting_rooms/) | Easy | Intervals | Sort by start, compare neighbors | LeetCode 252 (premium); NeetCode 150 |
+| 48 | [Minimum Interval to Include Each Query](neetcode/48_minimum_interval_to_include_each_query/) | Hard | Intervals | Offline sweep: sort queries, min-heap with lazy removal | LeetCode 1851; NeetCode 150 |
+| 49 | [Happy Number](neetcode/49_happy_number/) | Easy | Math & Geometry | Cycle detection on an implicit sequence (Floyd) | LeetCode 202; NeetCode 150 |
+| 50 | [Plus One](neetcode/50_plus_one/) | Easy | Math & Geometry | Carry propagation from the right | LeetCode 66; NeetCode 150 |
+| 51 | [Pow(x, n)](neetcode/51_pow_x_n/) | Medium | Math & Geometry | Exponentiation by squaring | LeetCode 50; NeetCode 150 |
+| 52 | [Multiply Strings](neetcode/52_multiply_strings/) | Medium | Math & Geometry | Grade-school multiplication with position arithmetic | LeetCode 43; NeetCode 150 |
+| 53 | [Detect Squares](neetcode/53_detect_squares/) | Medium | Math & Geometry | Enumerate the diagonal corner, look up the other two | LeetCode 2013; NeetCode 150 |
+| 54 | [Single Number](neetcode/54_single_number/) | Easy | Bit Manipulation | XOR cancels pairs | LeetCode 136; NeetCode 150 |
+| 55 | [Number of 1 Bits](neetcode/55_number_of_1_bits/) | Easy | Bit Manipulation | `n & (n - 1)` clears the lowest set bit | LeetCode 191; NeetCode 150, Blind 75 |
+| 56 | [Counting Bits](neetcode/56_counting_bits/) | Easy | Bit Manipulation | DP on the binary representation | LeetCode 338; NeetCode 150, Blind 75 |
+| 57 | [Reverse Bits](neetcode/57_reverse_bits/) | Easy | Bit Manipulation | Shift out of one number, shift into another | LeetCode 190; NeetCode 150, Blind 75 |
+| 58 | [Missing Number](neetcode/58_missing_number/) | Easy | Bit Manipulation | XOR indices with values (or the sum formula) | LeetCode 268; NeetCode 150, Blind 75 |
+| 59 | [Sum of Two Integers](neetcode/59_sum_of_two_integers/) | Medium | Bit Manipulation | XOR is addition without carry; AND-shift is the carry | LeetCode 371; NeetCode 150, Blind 75 |
+| 60 | [Reverse Integer](neetcode/60_reverse_integer/) | Medium | Math / Bit Manipulation | Digit popping with overflow checks before each step | LeetCode 7; NeetCode 150 |
 
 <!-- INDEX:END -->

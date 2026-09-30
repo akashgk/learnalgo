@@ -7,7 +7,7 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 filter="${1:-}"
 pass=0; fail=0; failed=()
-for f in $(ls -d easy/*/*.dart medium/*/*.dart hard/*/*.dart very_hard/*/*.dart more_problems/*/*.dart 2>/dev/null | grep "${filter}"); do
+for f in $(ls -d easy/*/*.dart medium/*/*.dart hard/*/*.dart very_hard/*/*.dart more_problems/*/*.dart neetcode/*/*.dart 2>/dev/null | grep "${filter}"); do
   if out=$(dart run "$f" 2>&1); then
     pass=$((pass+1))
   else
