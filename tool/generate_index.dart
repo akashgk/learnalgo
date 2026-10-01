@@ -11,6 +11,7 @@ const _levels = {
   'very_hard': 'Very Hard',
   'more_problems': 'More Problems (Striver A2Z, NeetCode 150, LeetCode)',
   'neetcode': 'NeetCode 150 (the rest of the list; see neetcode/README.md for the full map)',
+  'blind75_grind75': 'Blind 75 and Grind 75 (the rest of both lists; see blind75_grind75/README.md for the maps)',
 };
 
 void main() {
@@ -19,7 +20,7 @@ void main() {
   for (final MapEntry(key: dir, value: label) in _levels.entries) {
     final folders = Directory(dir).listSync().whereType<Directory>().toList()..sort((a, b) => a.path.compareTo(b.path));
     // The extra set mixes difficulties and sources, so it gets two more columns.
-    final extra = dir == 'more_problems' || dir == 'neetcode';
+    final extra = const {'more_problems', 'neetcode', 'blind75_grind75'}.contains(dir);
     buffer
       ..writeln('### $label (${folders.length})')
       ..writeln()

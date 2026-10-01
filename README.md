@@ -1,10 +1,11 @@
 # learnalgo
 
-308 interview problems solved in modern Dart (3.9+), one folder per problem:
+321 interview problems solved in modern Dart (3.9+), one folder per problem:
 
 - **198 AlgoExpert-style problems** in `easy/`, `medium/`, `hard/`, `very_hard/`.
 - **50 more problems** in `more_problems/`, taken from Striver's A2Z DSA sheet, NeetCode 150 / Blind 75 and LeetCode, chosen to **not** duplicate the AlgoExpert set (for example Next Permutation, Koko Eating Bananas, Sliding Window Maximum, Word Ladder, Alien Dictionary, Burst Balloons, LFU Cache). Each lists its LeetCode number and sheet in its README header.
 - **60 NeetCode 150 problems** in `neetcode/`: the part of the NeetCode 150 not already covered above. With them, **every NeetCode 150 problem is solved in this repo**; [`neetcode/README.md`](neetcode/README.md) maps all 150 to their folders, in NeetCode's roadmap order.
+- **13 more problems** in `blind75_grind75/`: the part of **Blind 75** and **Grind 75** not covered above. With them, **every problem on both lists is solved in this repo**; [`blind75_grind75/README.md`](blind75_grind75/README.md) maps both lists (Grind 75 by week).
 
 Each folder has:
 
@@ -25,7 +26,7 @@ Built for FAANG-level interview preparation (Google, Microsoft, Meta, Amazon, Ap
 - **The problem list is reconstructed, not scraped.** AlgoExpert's catalog is paywalled. The 198 problems here match the AlgoExpert question list as I know it (names, categories, difficulty tiers), but the exact count, tiering, and a few problem definitions on the live site may differ. Problems where I was unsure of the exact definition say so explicitly in their README (search for "Statement note" or "Clarification note").
 - **Problem statements are paraphrased** in my own words. This repo is not affiliated with AlgoExpert. Use it alongside the real platform if you have access, and treat any disagreement as a prompt to re-read the official statement.
 - **The `more_problems/` source labels are from memory.** The LeetCode numbers are standard. Which sheet a problem belongs to (Striver A2Z, NeetCode 150, Blind 75) is how I know those lists; the sheets get revised, so treat the labels as a guide, not an audit.
-- **Every solution is executed.** `tool/run_all.sh` runs all 308 files; CI runs `dart format` (check), `dart analyze --fatal-infos` (strict casts, inference, raw types), and every solution on each push. `tool/stress_test.dart` additionally cross-checks about 60 of the trickier solutions against independent brute-force implementations on random inputs (it caught a real infinite-loop bug in Juice Bottling during development), `tool/stress_test_more.dart` does the same for 45 of the 50 `more_problems/` solutions, and `tool/stress_test_neetcode.dart` for 55 of the 60 `neetcode/` solutions.
+- **Every solution is executed.** `tool/run_all.sh` runs all 321 files; CI runs `dart format` (check), `dart analyze --fatal-infos` (strict casts, inference, raw types), and every solution on each push. `tool/stress_test.dart` additionally cross-checks about 60 of the trickier solutions against independent brute-force implementations on random inputs (it caught a real infinite-loop bug in Juice Bottling during development), `tool/stress_test_more.dart` does the same for 45 of the 50 `more_problems/` solutions, `tool/stress_test_neetcode.dart` for 55 of the 60 `neetcode/` solutions, and `tool/stress_test_blind_grind.dart` for all 13 `blind75_grind75/` solutions.
 
 ## Running
 
@@ -37,6 +38,7 @@ tool/run_all.sh hard                  # run one difficulty (any path filter work
 dart run tool/stress_test.dart        # randomized brute-force cross-checks
 dart run tool/stress_test_more.dart   # the same for more_problems/
 dart run tool/stress_test_neetcode.dart   # the same for neetcode/
+dart run tool/stress_test_blind_grind.dart   # the same for blind75_grind75/
 dart analyze --fatal-infos
 dart format .                         # 120-column page width, set in analysis_options.yaml
 dart run tool/generate_index.dart     # rebuild the index below after adding problems
@@ -89,7 +91,7 @@ Order matters: each week builds on the previous. Do easy -> medium -> hard withi
 | 11 | NeetCode gap-fill, part 1: hashing, sliding window, stacks, binary search, trees, tries, heaps, graphs | neetcode 01-32 |
 | 12 | NeetCode gap-fill, part 2: 1-D and 2-D DP, greedy, intervals, math, bit manipulation | neetcode 33-60 |
 
-Every problem appears exactly once. Treat very hard problems as stretch goals in the first pass; come back to them after week 8. Weeks 9-12 revisit every pattern with problems you have not seen, which is the best test of whether weeks 1-8 transferred. If you prefer to follow the NeetCode roadmap instead, use the map in [`neetcode/README.md`](neetcode/README.md): it covers 150 of the 308 problems in NeetCode's order.
+Every problem appears exactly once. Treat very hard problems as stretch goals in the first pass; come back to them after week 8. Weeks 9-12 revisit every pattern with problems you have not seen, which is the best test of whether weeks 1-8 transferred. If you prefer to follow a published list instead, every list is mapped to folders here: NeetCode 150 in [`neetcode/README.md`](neetcode/README.md), Blind 75 and Grind 75 (week by week) in [`blind75_grind75/README.md`](blind75_grind75/README.md). The 13 `blind75_grind75/` problems fit in weeks 2-6 of this plan by topic, or do them alongside Grind 75's schedule.
 
 After week 12, do mixed random practice (pick problems by number with a random generator) to train **pattern recognition**, which is what interviews actually test.
 
@@ -175,7 +177,7 @@ After week 12, do mixed random practice (pick problems by number with a random g
 
 <!-- INDEX:START -->
 
-Total: 308 problems.
+Total: 321 problems.
 
 ### Easy (30)
 
@@ -514,5 +516,23 @@ Total: 308 problems.
 | 58 | [Missing Number](neetcode/58_missing_number/) | Easy | Bit Manipulation | XOR indices with values (or the sum formula) | LeetCode 268; NeetCode 150, Blind 75 |
 | 59 | [Sum of Two Integers](neetcode/59_sum_of_two_integers/) | Medium | Bit Manipulation | XOR is addition without carry; AND-shift is the carry | LeetCode 371; NeetCode 150, Blind 75 |
 | 60 | [Reverse Integer](neetcode/60_reverse_integer/) | Medium | Math / Bit Manipulation | Digit popping with overflow checks before each step | LeetCode 7; NeetCode 150 |
+
+### Blind 75 and Grind 75 (the rest of both lists; see blind75_grind75/README.md for the maps) (13)
+
+| # | Problem | Difficulty | Category | Pattern | Source |
+|---|---|---|---|---|---|
+| 01 | [Flood Fill](blind75_grind75/01_flood_fill/) | Easy | Graphs (grid) | DFS on a grid, recolor as visited | LeetCode 733; Grind 75 |
+| 02 | [Implement Queue using Stacks](blind75_grind75/02_implement_queue_using_stacks/) | Easy | Stacks / Design | Two stacks with lazy transfer (amortized O(1)) | LeetCode 232; Grind 75 |
+| 03 | [First Bad Version](blind75_grind75/03_first_bad_version/) | Easy | Binary Search | First true of a monotone predicate | LeetCode 278; Grind 75 |
+| 04 | [Longest Palindrome](blind75_grind75/04_longest_palindrome/) | Easy | Hashing / Greedy | Count pairs, allow one odd center | LeetCode 409; Grind 75 |
+| 05 | [Add Binary](blind75_grind75/05_add_binary/) | Easy | Math / Strings | Digit-by-digit addition with carry | LeetCode 67; Grind 75 |
+| 06 | [01 Matrix](blind75_grind75/06_zero_one_matrix/) | Medium | Graphs (grid) | Multi-source BFS (or two-pass DP) | LeetCode 542; Grind 75 |
+| 07 | [Lowest Common Ancestor of a Binary Tree](blind75_grind75/07_lowest_common_ancestor_of_binary_tree/) | Medium | Trees | Post-order DFS returning "what I found" | LeetCode 236; Grind 75 |
+| 08 | [String to Integer (atoi)](blind75_grind75/08_string_to_integer_atoi/) | Medium | Strings | Careful parsing state machine with overflow clamping | LeetCode 8; Grind 75 |
+| 09 | [Find All Anagrams in a String](blind75_grind75/09_find_all_anagrams_in_a_string/) | Medium | Sliding Window | Fixed-size window with a matching-letters counter | LeetCode 438; Grind 75 |
+| 10 | [Minimum Height Trees](blind75_grind75/10_minimum_height_trees/) | Medium | Graphs | Peel leaves layer by layer (find the tree's center) | LeetCode 310; Grind 75 |
+| 11 | [Basic Calculator](blind75_grind75/11_basic_calculator/) | Hard | Stacks | Running sum + sign, stack saves the outer context at `(` | LeetCode 224; Grind 75 |
+| 12 | [Maximum Profit in Job Scheduling](blind75_grind75/12_maximum_profit_in_job_scheduling/) | Hard | Dynamic Programming | Weighted interval scheduling (sort by end + binary search) | LeetCode 1235; Grind 75 |
+| 13 | [Combination Sum IV](blind75_grind75/13_combination_sum_iv/) | Medium | Dynamic Programming | Counting ordered sequences (loop order matters) | LeetCode 377; Blind 75 (the original list's "Combination Sum") |
 
 <!-- INDEX:END -->
