@@ -15,3 +15,4 @@ jobs:
       - run: dart run tool/stress_test_more.dart
       - run: dart run tool/stress_test_neetcode.dart
       - run: dart run tool/stress_test_blind_grind.dart
+      - run: dart run tool/check_lld.dart

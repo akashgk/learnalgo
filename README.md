@@ -7,6 +7,8 @@
 - **60 NeetCode 150 problems** in `neetcode/`: the part of the NeetCode 150 not already covered above. With them, **every NeetCode 150 problem is solved in this repo**; [`neetcode/README.md`](neetcode/README.md) maps all 150 to their folders, in NeetCode's roadmap order.
 - **13 more problems** in `blind75_grind75/`: the part of **Blind 75** and **Grind 75** not covered above. With them, **every problem on both lists is solved in this repo**; [`blind75_grind75/README.md`](blind75_grind75/README.md) maps both lists (Grind 75 by week).
 
+Plus **10 system design problems** in [`system_design/`](system_design/README.md) (URL shortener, rate limiter, distributed cache, parking lot, chat, news feed, notifications, ride sharing, movie ticket booking, typeahead). Each has an `HLD.md` (high-level design: estimates, architecture, deep dives, trade-offs) and an `LLD.md` (low-level design: classes, patterns, and a runnable, self-checking Dart implementation).
+
 Each folder has:
 
 - `<problem>.dart`: a runnable, self-checking solution (`dart run <file>` prints `ok:` lines and throws on any failed check).
@@ -26,7 +28,7 @@ Built for FAANG-level interview preparation (Google, Microsoft, Meta, Amazon, Ap
 - **The problem list is reconstructed, not scraped.** AlgoExpert's catalog is paywalled. The 198 problems here match the AlgoExpert question list as I know it (names, categories, difficulty tiers), but the exact count, tiering, and a few problem definitions on the live site may differ. Problems where I was unsure of the exact definition say so explicitly in their README (search for "Statement note" or "Clarification note").
 - **Problem statements are paraphrased** in my own words. This repo is not affiliated with AlgoExpert. Use it alongside the real platform if you have access, and treat any disagreement as a prompt to re-read the official statement.
 - **The `more_problems/` source labels are from memory.** The LeetCode numbers are standard. Which sheet a problem belongs to (Striver A2Z, NeetCode 150, Blind 75) is how I know those lists; the sheets get revised, so treat the labels as a guide, not an audit.
-- **Every solution is executed.** `tool/run_all.sh` runs all 321 files; CI runs `dart format` (check), `dart analyze --fatal-infos` (strict casts, inference, raw types), and every solution on each push. `tool/stress_test.dart` additionally cross-checks about 60 of the trickier solutions against independent brute-force implementations on random inputs (it caught a real infinite-loop bug in Juice Bottling during development), `tool/stress_test_more.dart` does the same for 45 of the 50 `more_problems/` solutions, `tool/stress_test_neetcode.dart` for 55 of the 60 `neetcode/` solutions, and `tool/stress_test_blind_grind.dart` for all 13 `blind75_grind75/` solutions.
+- **Every solution is executed.** `tool/run_all.sh` runs all 321 files; CI runs `dart format` (check), `dart analyze --fatal-infos` (strict casts, inference, raw types), and every solution on each push. `tool/stress_test.dart` additionally cross-checks about 60 of the trickier solutions against independent brute-force implementations on random inputs (it caught a real infinite-loop bug in Juice Bottling during development), `tool/stress_test_more.dart` does the same for 45 of the 50 `more_problems/` solutions, `tool/stress_test_neetcode.dart` for 55 of the 60 `neetcode/` solutions, and `tool/stress_test_blind_grind.dart` for all 13 `blind75_grind75/` solutions. `tool/check_lld.dart` extracts the program from each `system_design/*/LLD.md` and formats, analyzes and runs it.
 
 ## Running
 
@@ -39,6 +41,7 @@ dart run tool/stress_test.dart        # randomized brute-force cross-checks
 dart run tool/stress_test_more.dart   # the same for more_problems/
 dart run tool/stress_test_neetcode.dart   # the same for neetcode/
 dart run tool/stress_test_blind_grind.dart   # the same for blind75_grind75/
+dart run tool/check_lld.dart          # format, analyze and run the code in every system_design/*/LLD.md
 dart analyze --fatal-infos
 dart format .                         # 120-column page width, set in analysis_options.yaml
 dart run tool/generate_index.dart     # rebuild the index below after adding problems
