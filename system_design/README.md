@@ -1,6 +1,6 @@
 # System Design
 
-Twenty system design problems that come up again and again in interviews. Each folder has two files:
+Thirty system design problems that come up again and again in interviews. Each folder has two files:
 
 - **`HLD.md` (high-level design):** scope questions, requirements, capacity estimates, API, data model, an architecture diagram, deep dives on the hard parts, failure modes, what interviewers look for, common mistakes, follow-ups.
 - **`LLD.md` (low-level design):** scope for the LLD round, the classes and their responsibilities, a class diagram, design decisions (patterns, SOLID), **one complete runnable Dart program** with self-checks, a walkthrough, concurrency notes, an extensibility table, common mistakes.
@@ -31,6 +31,16 @@ The code in every `LLD.md` is verified: `dart run tool/check_lld.dart` extracts 
 | 18 | [Elevator System](18_elevator_system/) | Local control vs cloud monitoring, dispatching, safety layers, modes | LOOK scheduling, cost-based dispatcher, hall/car calls, out-of-service reassignment |
 | 19 | [Distributed Job Scheduler](19_job_scheduler/) | Exactly-once triggering, leases and heartbeats, retries, misfires, top-of-hour spikes | Cron parser and `next()`, idempotent run IDs, leases with fencing, backoff, misfire policies |
 | 20 | [Expense Sharing (Splitwise)](20_expense_sharing/) | Derived balances with a zero-sum invariant, edits with versions, simplification | Split strategies with exact rounding, net and pairwise balances, edits, greedy simplification |
+| 21 | [Unique ID Generator](21_unique_id_generator/) | Snowflake vs UUID vs ticket servers, bit layout, worker ID leases, clock skew | Configurable Snowflake, sequence exhaustion, clock rollback, range allocator, lease registry |
+| 22 | [Search Engine](22_search_engine/) | Inverted index, indexing pipeline, document vs term partitioning, scatter-gather, ranking | Analyzer, positional index, AND/OR/phrase queries, BM25, sharded search with global statistics |
+| 23 | [Proximity Service](23_proximity_service/) | Geohash vs quadtree vs S2, precision from radius, cell caching, read-heavy scaling | Geohash encode/neighbors, prefix-scan index, quadtree, both checked against brute force |
+| 24 | [Leaderboard](24_leaderboard/) | Sorted sets, rank in O(log n), time windows, durability via event log, huge boards | Skip list with rank spans (Redis ZSET), ties by time, windowed boards, randomized cross-check |
+| 25 | [Metrics Monitoring](25_metrics_monitoring/) | Time-series model, cardinality, pull vs push, TSDB storage, downsampling, alerting | Series identity, label index, `rate` with resets, `sum by`, downsampling, alert state machine |
+| 26 | [Log Aggregation](26_log_aggregation/) | Agents and Kafka buffering, full-text vs label indexing, tiers, retention, redaction | Logfmt parsing, PII redaction, time-partitioned chunks, chunk skipping, rate limits, patterns |
+| 27 | [Ad Click Aggregation](27_ad_click_aggregation/) | Event time, watermarks, late data, exactly-once via checkpoints, reconciliation | Dedup, tumbling windows, watermark firing, late output, checkpoint/restore with idempotent sink |
+| 28 | [Stock Exchange](28_stock_exchange/) | Order book, deterministic single-threaded matching, sequencer, replication by replay | Price-time priority book, limit/market/IOC, partial fills, cancels, journal replay |
+| 29 | [Hotel Reservation](29_hotel_reservation/) | Inventory per room type per night, optimistic vs pessimistic locking, overbooking | Versioned per-night inventory, all-or-nothing commits, retries, idempotency, weekend pricing |
+| 30 | [E-Commerce Checkout](30_ecommerce_checkout/) | Saga vs 2PC, inventory reservations, flash sales, order state machine | Pricing, reservations with expiry, saga orchestrator with compensations and resumable log |
 
 Suggested order: 01, 02, 03 (building blocks used by the others), then 06, 05, 07, 09, 08, 10. Then the infrastructure set: 15 (key-value store), 16 (message queue), 19 (job scheduler), 11 (web crawler); then the product set: 13, 12, 14, 17.
 
