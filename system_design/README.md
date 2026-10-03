@@ -1,6 +1,6 @@
 # System Design
 
-Forty system design problems that come up again and again in interviews. Each folder has two files:
+Fifty system design problems that come up again and again in interviews. Each folder has two files:
 
 - **`HLD.md` (high-level design):** scope questions, requirements, capacity estimates, API, data model, an architecture diagram, deep dives on the hard parts, failure modes, what interviewers look for, common mistakes, follow-ups.
 - **`LLD.md` (low-level design):** scope for the LLD round, the classes and their responsibilities, a class diagram, design decisions (patterns, SOLID), **one complete runnable Dart program** with self-checks, a walkthrough, concurrency notes, an extensibility table, common mistakes.
@@ -51,10 +51,22 @@ The code in every `LLD.md` is verified: `dart run tool/check_lld.dart` extracts 
 | 38 | [Feature Flags](38_feature_flags/) | Local evaluation, salted monotonic bucketing, streaming updates, kill switches | Ordered rules with reasons, targets, prerequisites, rollouts, versioned SDK updates |
 | 39 | [CDN](39_cdn/) | Anycast/DNS routing, tiered caching, cache keys, coalescing, invalidation | Key normalization, Cache-Control, byte LRU, coalescing, stale-while-revalidate, shield, tag purge |
 | 40 | [Online Judge](40_online_judge/) | Sandboxing untrusted code, queue + workers, verdicts, contest spikes, scoreboards | Priority queue, rate limit, sandbox interface, language multipliers, verdict order, ICPC scoreboard |
+| 41 | [Recommendation System](41_recommendation_system/) | Candidate generation -> ranking -> re-ranking funnel, embeddings/ANN, feature stores, cold start | Item-item collaborative filtering, explanations, popularity fallback, diversity, hit-rate evaluation |
+| 42 | [Dating App](42_dating_app/) | Geo-filtered decks, swipe volume, race-free matches, location privacy | Mutual preference filters, deck exclusions, idempotent swipes, pair-key matches, limits, fuzzed distance |
+| 43 | [ATM System](43_atm_system/) | Authorization/completion/reversal flow, idempotency, PIN security with HSMs | State machine, PIN retention, bank interface with reversals, bounded-note DP dispensing, limits |
+| 44 | [Vending Machine](44_vending_machine/) | Connected fleet, offline-first sales, telemetry and restocking | State pattern classes, escrow, change-making with limited coins, exact-change mode, jams |
+| 45 | [Library Management](45_library_management/) | Title vs copy, fair holds across branches, notifications, fines | Copy states, loan limits, renewals, FIFO holds with pickup expiry, capped fines, search |
+| 46 | [Multiplayer Game](46_multiplayer_game/) | Matchmaking, authoritative game servers, durable move logs, reconnection | N x N K-in-a-row with O(K) win check, move validation, timers, Elo, widening match windows |
+| 47 | [Car Rental](47_car_rental/) | Interval availability, class booking vs car assignment, one-way rentals, pricing | Peak-overlap availability with buffers, pickup assignment, pricing rules, late and fuel fees |
+| 48 | [Top-K Heavy Hitters](48_top_k_heavy_hitters/) | Exact vs approximate counting, distributed merging pitfalls, windows | Count-Min Sketch, Space-Saving, mergeable minute buckets, accuracy checks on Zipf data |
+| 49 | [Reddit-Style Voting](49_reddit_voting/) | Idempotent votes, hot ranking, Wilson score, comment trees, listings | Vote deltas and karma, hot formula, Wilson lower bound, lazy threaded rendering |
+| 50 | [Email Service](50_email_service/) | SMTP pipelines, SPF/DKIM/DMARC, metadata vs blobs, labels, per-user search | Threading by headers/subject, labels and unread counts, search operators, spam rules, retries and bounces |
 
 Suggested order: 01, 02, 03 (building blocks used by the others), then 06, 05, 07, 09, 08, 10. Then the infrastructure set: 15 (key-value store), 16 (message queue), 19 (job scheduler), 11 (web crawler); then the product set: 13, 12, 14, 17.
 
-Pure LLD questions: 04 (parking lot), 18 (elevator), 20 (expense sharing). Do them early if your loop has an LLD round.
+Then 21-50 in any order; good groupings: data infrastructure (21, 25, 26, 27, 37, 48), search and ranking (22, 23, 41, 49), transactions and inventory (28, 29, 30, 47), real-time and social (31, 32, 33, 34, 42, 46), platform (35, 36, 38, 39, 40, 50).
+
+Pure LLD questions: 04 (parking lot), 18 (elevator), 20 (expense sharing), 43 (ATM), 44 (vending machine), 45 (library), 46 (tic-tac-toe), 47 (car rental). Do them early if your loop has an LLD round.
 
 ## How to run a high-level design interview (45 minutes)
 
