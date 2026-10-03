@@ -1,6 +1,6 @@
 # System Design
 
-Thirty system design problems that come up again and again in interviews. Each folder has two files:
+Forty system design problems that come up again and again in interviews. Each folder has two files:
 
 - **`HLD.md` (high-level design):** scope questions, requirements, capacity estimates, API, data model, an architecture diagram, deep dives on the hard parts, failure modes, what interviewers look for, common mistakes, follow-ups.
 - **`LLD.md` (low-level design):** scope for the LLD round, the classes and their responsibilities, a class diagram, design decisions (patterns, SOLID), **one complete runnable Dart program** with self-checks, a walkthrough, concurrency notes, an extensibility table, common mistakes.
@@ -41,6 +41,16 @@ The code in every `LLD.md` is verified: `dart run tool/check_lld.dart` extracts 
 | 28 | [Stock Exchange](28_stock_exchange/) | Order book, deterministic single-threaded matching, sequencer, replication by replay | Price-time priority book, limit/market/IOC, partial fills, cancels, journal replay |
 | 29 | [Hotel Reservation](29_hotel_reservation/) | Inventory per room type per night, optimistic vs pessimistic locking, overbooking | Versioned per-night inventory, all-or-nothing commits, retries, idempotency, weekend pricing |
 | 30 | [E-Commerce Checkout](30_ecommerce_checkout/) | Saga vs 2PC, inventory reservations, flash sales, order state machine | Pricing, reservations with expiry, saga orchestrator with compensations and resumable log |
+| 31 | [Food Delivery](31_food_delivery/) | Three-sided marketplace, order lifecycle, dispatch timed to food readiness, batching, ETAs | Order state machine, cancellation policy, readiness-aware courier choice, batching rules |
+| 32 | [Photo Sharing](32_photo_sharing/) | Pre-signed uploads, async processing, CDN variants, like-count hot spots, stories | Signed upload grants, variant sizing, idempotent likes with sharded counters, expiring stories, hashtags |
+| 33 | [Social Graph](33_social_graph/) | Adjacency storage, degree of connection, PYMK, super-nodes, cross-shard traversal | Bidirectional BFS with paths, mutuals, PYMK, blocking, work comparison with one-sided BFS |
+| 34 | [Live Comments](34_live_comments/) | Two-level fan-out through gateways, sampling huge streams, moderation, catch-up | Gateway subscriptions, local fan-out, recent buffer, slow mode and filters, priority-aware sampling |
+| 35 | [Maps and Navigation](35_maps_navigation/) | Tiles, road graph routing (A*, contraction hierarchies), traffic and ETAs, rerouting | Tile math, Dijkstra vs A* on one implementation, congestion, one-way streets, reroute |
+| 36 | [API Gateway](36_api_gateway/) | Request pipeline, data vs control plane, retries and circuit breakers, canaries | Route specificity, auth and rate limit, round robin, idempotent retries, breaker states, sticky canary |
+| 37 | [Distributed Lock](37_distributed_lock/) | Consensus-backed locks, leases, fencing tokens, herd-free queues, Redlock caveats | Leases and renewal, owner-checked release, FIFO hand-off, global tokens, fenced storage |
+| 38 | [Feature Flags](38_feature_flags/) | Local evaluation, salted monotonic bucketing, streaming updates, kill switches | Ordered rules with reasons, targets, prerequisites, rollouts, versioned SDK updates |
+| 39 | [CDN](39_cdn/) | Anycast/DNS routing, tiered caching, cache keys, coalescing, invalidation | Key normalization, Cache-Control, byte LRU, coalescing, stale-while-revalidate, shield, tag purge |
+| 40 | [Online Judge](40_online_judge/) | Sandboxing untrusted code, queue + workers, verdicts, contest spikes, scoreboards | Priority queue, rate limit, sandbox interface, language multipliers, verdict order, ICPC scoreboard |
 
 Suggested order: 01, 02, 03 (building blocks used by the others), then 06, 05, 07, 09, 08, 10. Then the infrastructure set: 15 (key-value store), 16 (message queue), 19 (job scheduler), 11 (web crawler); then the product set: 13, 12, 14, 17.
 
